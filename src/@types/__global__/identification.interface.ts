@@ -1,4 +1,5 @@
+// The identity interface supports querying and finding data from the api response
 export interface Identification {
-    name: string,
-    id: number
+    id: number,
+    name: string
 }
