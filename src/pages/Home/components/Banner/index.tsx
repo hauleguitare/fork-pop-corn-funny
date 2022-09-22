@@ -5,9 +5,12 @@ import BannerSlider from '@src/components/Slider/BannerSection';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState } from 'react';
 
-interface IBannerSectionProps {}
+interface IBannerSectionProps {
+  className?: string;
+}
 
 const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
+  const { className } = props;
   const [type, setType] = useState('trending');
   const [category, setCategory] = useState<ICategory>({ id: 'all', name: 'all' });
   const [timeWindows, SetWindowTime] = useState('day');
@@ -26,4 +29,7 @@ const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
   );
 };
 
+BannerSection.defaultProps = {
+  className: '',
+};
 export default BannerSection;

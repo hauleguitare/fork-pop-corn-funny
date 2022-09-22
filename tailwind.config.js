@@ -974,7 +974,7 @@ module.exports = {
           'surface' : "#1c1b1b",
           'on-surface': "#2b2929",
           'primary': "#ce93d8",
-          'secondary' : '#80deea',
+          'secondary' : '#CA8A04',
           'text-default': '#D6D1D3',
           'text-primary': "#fafafa",
           'text-secondary': "#000000",

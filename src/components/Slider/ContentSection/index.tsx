@@ -4,13 +4,18 @@ import { Navigation } from 'swiper';
 import { IAbstractMovie } from '@src/@types/__movies__';
 import Card from '@src/components/Card';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+import { ICategory } from '@src/@types/__global__';
+import { useDispatch } from 'react-redux';
+import { activeReview } from '@src/services/Slices/reviewMovieSlice';
 
 interface IContentSliderProps {
   data: IAbstractMovie[];
+  type: ICategory;
 }
 
 const ContentSlider: React.FunctionComponent<IContentSliderProps> = (props) => {
-  const { data } = props;
+  const { data, type } = props;
+  const dispatch = useDispatch();
   return (
     <Swiper
       slidesPerView={'auto'}
@@ -47,11 +52,23 @@ const ContentSlider: React.FunctionComponent<IContentSliderProps> = (props) => {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       }}
-      className={'rounded-md'}
     >
       {data.map((item) => (
-        <SwiperSlide key={item.id} className="!w-44">
+        <SwiperSlide
+          key={item.id}
+          className="!w-44"
+          onClick={() => {
+            dispatch(
+              activeReview({
+                movie: item,
+                media_type: type.id,
+              })
+            );
+          }}
+        >
           <Card
+            className="pb-8"
+            type={type}
             widthSkeleton="176px"
             heightSkeleton="263px"
             id={item.id}
@@ -62,12 +79,12 @@ const ContentSlider: React.FunctionComponent<IContentSliderProps> = (props) => {
       ))}
 
       <div className="absolute top-0 left-0 bottom-0 w-10 flex items-center opacity-80 hover:opacity-100 backdrop-blur-lg bg-black/30 z-10 transition duration-150 rounded-tr-md rounded-br-md">
-        <div className="swiper-button-prev">
+        <div className="swiper-button-prev h-full items-center flex">
           <GrPrevious size={'40px'} />
         </div>
       </div>
       <div className="absolute top-0 right-0 bottom-0 w-10 flex items-center opacity-80 hover:opacity-100 backdrop-blur-lg bg-black/30 z-10 transition duration-150 rounded-tl-md rounded-bl-md">
-        <div className="swiper-button-next">
+        <div className="swiper-button-next h-full items-center flex">
           <GrNext size={'40px'} />
         </div>
       </div>
