@@ -1,0 +1,7 @@
+.swiper-button-prev{
+    @apply cursor-pointer;
+}
+
+.swiper-button-next{
+    @apply cursor-pointer;
+}

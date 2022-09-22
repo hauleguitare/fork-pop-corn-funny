@@ -968,8 +968,22 @@ module.exports = {
           'dark-lighting': "#2b2b2a",
           'chocolate': '#414040',
           'light-chocolate': '#575655'
+        },
+        'dark-smooth': {
+          'theme': "#121212",
+          'surface' : "#1c1b1b",
+          'on-surface': "#2b2929",
+          'primary': "#ce93d8",
+          'secondary' : '#80deea',
+          'text-default': '#D6D1D3',
+          'text-primary': "#fafafa",
+          'text-secondary': "#000000",
+          'brand': "#FBC02D",
+          'button-default': "#78716c",
+          'button-hover': "#a8a29e",
+          'button-disabled': "#44403c"
         }
-      }
+      },
     },
   },
   variantOrder: [

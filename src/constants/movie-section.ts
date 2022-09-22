@@ -1,7 +1,11 @@
+import { ICategory } from "@src/@types/__global__";
+
 // section for trending displayed the Home Pages
 export const TRENDING_SECTION = {
     time_windows: ['day', 'week'],
-    media_type: [
+    id: 'trending',
+    name: 'trending',
+    type: [
         {
             id: 'all',
             name: 'all'
@@ -35,7 +39,7 @@ export const POPULAR_SECTION = {
 
 // section for top rated displayed the Home Pages
 export const TOPRATED_SECTION = {
-    id: 'top-rated',
+    id: 'top_rated',
     name: 'top rated',
     type: [
         {
@@ -51,7 +55,7 @@ export const TOPRATED_SECTION = {
 
 // section for on tv displayed the Home Pages
 export const ONTV_SECTION = {
-    id: 'on-the-air',
+    id: 'on_the_air',
     name: 'on the air',
     type: [
         {
@@ -75,7 +79,7 @@ export const UPCOMING_SECTION = {
 
 // section for airing today displayed the Home Pages
 export const AIRINGTODAY_SECTION = {
-    id: 'airing-today',
+    id: 'airing_today',
     name: 'aringtoday',
     type: [
         {

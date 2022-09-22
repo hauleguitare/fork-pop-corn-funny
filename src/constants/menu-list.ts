@@ -1,8 +1,8 @@
 import { IMenuList } from "@src/@types/__global__/menu-list.interface";
 
 
-// menu list displayed on navbar
-const MENU_LIST: IMenuList[] =[
+// menu list displayed header
+export const MENU_LIST: IMenuList[] =[
     {
         id: 'movie',
         name: 'movies',
@@ -82,4 +82,23 @@ const MENU_LIST: IMenuList[] =[
     },
 ];
 
-export default MENU_LIST;
+
+// This is list menu list for navbar when using mobile
+export const MENU_LIST_NAVBAR : IMenuList[] = [
+    {
+        id: 'home',
+        name: 'Home',
+        url: '/'
+    },
+    {
+        id: 'discover',
+        name: 'Discover',
+        url:'/discover'
+    },
+    {
+        id: 'search',
+        name: 'Search',
+        url: '/search'
+    },
+    ...MENU_LIST
+]
