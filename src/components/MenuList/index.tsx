@@ -2,6 +2,7 @@ import { IMenuList } from '@src/@types/__global__';
 import React, { Fragment, useState } from 'react';
 import ListItem from '../ListItem';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Link } from 'react-router-dom';
 
 interface IMenuListProps {
   list: IMenuList[];
@@ -25,7 +26,9 @@ const MenuList: React.FunctionComponent<IMenuListProps> = (props) => {
                 className={childClassName}
                 renderItem={(dropdown) => (
                   <li key={dropdown.id}>
-                    <span>{dropdown.name}</span>
+                    <Link to={`${item.url}${dropdown.url}`}>
+                      <span>{dropdown.name}</span>
+                    </Link>
                   </li>
                 )}
               />

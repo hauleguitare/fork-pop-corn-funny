@@ -64,11 +64,11 @@ const SearchPage: React.FunctionComponent<ISearchPageProps> = (props) => {
       <div className="flex justify-center">
         <form
           onSubmit={handleOnSubmit}
-          className="text-white h-14 relative bg-stone-chocolate flex items-center rounded-xl overflow-hidden w-full"
+          className="text-white/80 h-14 relative bg-dark-smooth-surface flex items-center rounded-xl overflow-hidden w-full"
         >
           <button
             onSubmit={handleOnSubmit}
-            className="absolute top-0 h-full px-2 bg-stone-light-chocolate text-white/50 z-0"
+            className="absolute top-0 h-full px-2 bg-dark-smooth-on-surface text-dark-smooth-text-default z-0"
           >
             Search
           </button>
@@ -87,8 +87,8 @@ const SearchPage: React.FunctionComponent<ISearchPageProps> = (props) => {
               onClick={() => setType(item.id.toString())}
               key={item.id}
               className={`${
-                item.id === type ? 'bg-stone-300' : 'bg-stone-600'
-              } px-2 py-2 rounded-lg hover:bg-stone-400 transition-colors duration-150`}
+                item.id === type ? 'bg-dark-smooth-primary' : 'bg-dark-smooth-button-default'
+              } px-2 py-2 rounded-lg hover:bg-dark-smooth-button-hover transition-colors duration-150`}
             >
               {item.name}
             </button>

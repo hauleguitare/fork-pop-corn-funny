@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
 import { RiCompassDiscoverFill, RiLoginBoxFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 interface IMobileNavBarProps {
   isOpenMenu: boolean;
   setOpenMenu: (isOpenMenu: boolean) => void;
@@ -16,25 +17,37 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
       <nav
         className={`${
           isOpenMenu ? 'translate-x-100%' : 'translate-x-[-100%]'
-        } fixed top-16 z-0 left-0 bottom-0 bg-dark-smooth-on-surface transition-transform duration-200 ease-in`}
+        } fixed top-16 z-0 left-0 bottom-0 bg-dark-smooth-on-surface transition-transform duration-200 ease-in overflow-auto overflow-y-auto`}
       >
         <div className="text-dark-smooth-text-default ml-4 mt-4 pr-8">
           <ul className="mx-4 mt-4 pb-2 border-b-2 border-b-stone-700 text-xl">
-            <li className="flex gap-4 items-center">
-              <AiFillHome />
-              <span>HOME</span>
+            <li>
+              <Link to={'/'} className="flex gap-4 items-center">
+                <AiFillHome />
+                <span>HOME</span>
+              </Link>
             </li>
-            <li className="flex gap-4 items-center">
-              <RiCompassDiscoverFill />
-              <span>DISCOVER</span>
+            <li className="flex flex-col">
+              <div className="flex gap-4 items-center">
+                <RiCompassDiscoverFill />
+                <span>DISCOVER</span>
+              </div>
+              <ul className="flex flex-col ml-4 text-lg text-dark-smooth-text-default/60">
+                <Link to={'/movie'}>Movies</Link>
+                <Link to={'/tv'}>TV</Link>
+              </ul>
             </li>
-            <li className="flex gap-4 items-center">
-              <FiSearch />
-              <span>SEARCH</span>
+            <li>
+              <Link to={'/search'} className="flex gap-4 items-center">
+                <FiSearch />
+                <span>SEARCH</span>
+              </Link>
             </li>
-            <li className="flex gap-4 items-center">
-              <RiLoginBoxFill />
-              <span>LOGIN</span>
+            <li>
+              <Link to={'/login'} className="flex gap-4 items-center">
+                <RiLoginBoxFill />
+                <span>LOGIN</span>
+              </Link>
             </li>
           </ul>
           <MenuList
