@@ -1,0 +1,3 @@
+.tw-slider-range::-webkit-slider-thumb {
+  @apply appearance-none h-4 w-4 rounded-full bg-dark-smooth-secondary hover:scale-150 duration-150 pointer-events-auto;
+}

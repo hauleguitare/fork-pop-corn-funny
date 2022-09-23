@@ -1,24 +1,25 @@
 import { Route, Routes } from 'react-router';
+import DiscoverPage from './Discover';
 import HomePage from './Home';
+import NotFoundPage from './NotFound';
+import SearchPage from './Search';
 
 interface IClientRoutesProps {}
 const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<div>SEARCH PAGE</div>} />
-        <Route path="/movie" element={<div>GENRES MOVIE</div>}>
-          <Route path="movie/:movie_id" element={<div>DETAIL MOVIE</div>} />
-        </Route>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/movie" element={<DiscoverPage type="movie" />}>
+        <Route path="movie/:movie_id" element={<div>DETAIL MOVIE</div>} />
+      </Route>
 
-        <Route path="/tv" element={<div>GENRES TV</div>}>
-          <Route path="tv/:movie_id" element={<div>DETAIL TV</div>} />
-        </Route>
+      <Route path="/tv" element={<DiscoverPage type="tv" />}>
+        <Route path="tv/:movie_id" element={<div>DETAIL TV</div>} />
+      </Route>
 
-        <Route path="*" element={<div>NOT FOUND</div>} />
-      </Routes>
-    </div>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
 

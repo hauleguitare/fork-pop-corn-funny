@@ -61,7 +61,7 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = (props) => {
 */
 
   const handleGetRecommendation = async (query: IParams) => {
-    const promise = fetchSearch('multi', query);
+    const promise = fetchSearch('multi', query, 1);
     setLoading(true);
     promise.then((res) => {
       const count = res.results.reduce(handleCountRecommend, initialCount);

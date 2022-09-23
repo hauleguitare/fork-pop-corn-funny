@@ -68,7 +68,6 @@ const ContentSlider: React.FunctionComponent<IContentSliderProps> = (props) => {
         >
           <Card
             className="pb-8"
-            type={type}
             widthSkeleton="176px"
             heightSkeleton="263px"
             id={item.id}

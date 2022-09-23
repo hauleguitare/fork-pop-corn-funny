@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import FallBackCard from '@src/asserts/images/fallback_card.png';
+import FallBackCard from '@src/asserts/images/fallback_card300x450.png';
 import { BiPlayCircle } from 'react-icons/bi';
 import Skeleton from '../Skeleton';
 import useCurrentViewPort from '@src/hooks/useCurrentViewPort';
@@ -10,10 +10,9 @@ import { IAbstractMovie } from '@src/@types/__movies__';
 
 interface ICardProps {
   className?: string;
-  type: ICategory;
   title: string;
   id: number;
-  img: string | null;
+  img?: string;
   widthImageEndpoint?: string;
   url?: string;
   widthSkeleton?: string;
@@ -21,7 +20,7 @@ interface ICardProps {
 }
 
 const Card: React.FunctionComponent<ICardProps> = (props) => {
-  const { title, id, img, widthImageEndpoint, type, url, className, widthSkeleton, heightSkeleton } = props;
+  const { title, id, img, widthImageEndpoint, url, className, widthSkeleton, heightSkeleton } = props;
 
   return (
     <div className={className}>

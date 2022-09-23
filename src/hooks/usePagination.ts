@@ -7,6 +7,8 @@ interface IusePaginationProps {
 }
 
 const DOTS = '...';
+const LEFT_DOTS = 'left...';
+const RIGHT_DOTS = '...right';
 
 const calRange = (startIndex: number, endIndex: number) =>{
     let length = endIndex - startIndex +1;
@@ -34,18 +36,18 @@ const usePagination = (props: IusePaginationProps) =>{
         if (!shouldShowLeftDots && shouldShowRightDots){
             let leftItemCount = 3 + 2 * siblingCount;
             let leftRange = calRange(1, leftItemCount);
-            return [...leftRange, DOTS, lastPageIndex];
+            return [...leftRange, RIGHT_DOTS, lastPageIndex];
         }
 
         if (shouldShowLeftDots && !shouldShowRightDots){
             let rightItemCount = 3 + 2 * siblingCount;
             let rightRange = calRange(totalPages - rightItemCount + 1, totalPages);
-            return [firstPageIndex, DOTS, ...rightRange];
+            return [firstPageIndex, LEFT_DOTS, ...rightRange];
         }
 
         if (shouldShowLeftDots && shouldShowRightDots){
             let middleRange = calRange(leftSiblingIndex, rightSiblingIndex);
-            return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+            return [firstPageIndex, LEFT_DOTS, ...middleRange, RIGHT_DOTS, lastPageIndex];
         }
         else{
             return [];

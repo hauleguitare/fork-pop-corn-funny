@@ -17,8 +17,9 @@ import ContentLoading from './components/Content/Loading';
 interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
+  document.title = 'Home Page';
   return (
-    <Fragment>
+    <main>
       <BannerSection className="container max-w-[1280px] shadow-[#1c1b1b] hover:shadow-lg transition-shadow duration-75" />
       <ContentSection sectionType={POPULAR_SECTION} title={`What's Popular`} />
       <ContentSection sectionType={TOPRATED_SECTION} title={`Let start with top rated`} />
@@ -31,7 +32,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
       /> */}
 
       <ReviewMovie />
-    </Fragment>
+    </main>
   );
 };
 

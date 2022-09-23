@@ -15,11 +15,11 @@ const ContentLoading: React.FunctionComponent<IContentLoadingProps> = (props) =>
     <AnimatePresence>
       {isLoading && (
         <MotionConfig transition={{ duration: 1, delay: 2 }}>
-          <Skeleton className="flex flex-start cursor-progress overflow-hidden relative flex-nowrap my-16 bg-dark-smooth-surface/30 container shadow-md rounded-lg">
+          <Skeleton className="flex flex-start cursor-progress overflow-hidden relative flex-nowrap bg-dark-smooth-surface/30 container shadow-md rounded-lg">
             {arr.map((item) => (
               <motion.div
                 key={item}
-                className="min-w-[176px] min-h-[263px] mr-[30px] bg-dark-smooth-on-surface rounded-lg  shadow-md"
+                className="min-w-[176px] min-h-[263px] mr-[30px] bg-dark-smooth-on-surface rounded-lg  shadow-md mb-14"
                 initial={{
                   opacity: 0,
                 }}
