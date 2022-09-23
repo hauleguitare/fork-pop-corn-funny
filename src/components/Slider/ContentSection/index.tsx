@@ -21,7 +21,7 @@ const ContentSlider: React.FunctionComponent<IContentSliderProps> = (props) => {
       slidesPerView={'auto'}
       preventClicksPropagation
       preventClicks={false}
-      slidesPerGroup={6}
+      slidesPerGroup={7}
       modules={[Navigation]}
       watchSlidesProgress
       breakpoints={{

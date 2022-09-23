@@ -12,7 +12,7 @@ function App() {
       <div className="App bg-dark-smooth-theme">
         <Header />
         <ClientRoutes />
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </GenresProvider>
   );

@@ -4,6 +4,7 @@ import { fetchMovies } from '@src/api';
 import ContentSlider from '@src/components/Slider/ContentSection';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import ContentLoading from './Loading';
 
 interface IContentSectionProps {
   sectionType: IContentSection;
@@ -21,12 +22,19 @@ const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) =>
       return fetchMovies<IAbstractMovie>(type.id, endpoint);
     }
   );
+
+  if (isLoading) {
+    <div className="my-16 bg-dark-smooth-surface/30 container shadow-md rounded-lg">
+      <ContentLoading isLoading={isLoading} />;
+    </div>;
+  }
+
   return (
-    <section className="my-16 bg-dark-smooth-surface/30 container shadow-lg">
+    <section className="my-16 bg-dark-smooth-surface/30 container shadow-md rounded-lg">
       <h3 className="up-mobile:pl-0 pl-4 pt-2 inline-block text-xl text-dark-smooth-text-default/80 font-oswald pb-4 capitalize">
         {title}
       </h3>
-      {data && <ContentSlider data={data.results} type={type} />}
+      {data ? <ContentSlider data={data.results} type={type} /> : <ContentLoading isLoading={true} />}
     </section>
   );
 };

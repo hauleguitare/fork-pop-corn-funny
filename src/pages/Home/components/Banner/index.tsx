@@ -4,6 +4,7 @@ import { fetchMovies } from '@src/api';
 import BannerSlider from '@src/components/Slider/BannerSection';
 import { useQuery } from '@tanstack/react-query';
 import React, { createContext, useState } from 'react';
+import BannerLoading from './Loading';
 
 interface IBannerSectionProps {
   className?: string;
@@ -22,9 +23,13 @@ const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
     }
   );
 
+  if (isLoading) {
+    return <BannerLoading isLoading={isLoading} />;
+  }
+
   return (
     <section className="container max-w-[1280px] shadow-[#1c1b1b] hover:shadow-lg transition-shadow duration-75">
-      {data && <BannerSlider data={data.results} />}
+      {data ? <BannerSlider data={data.results} /> : <BannerLoading isLoading={true} />}
     </section>
   );
 };
