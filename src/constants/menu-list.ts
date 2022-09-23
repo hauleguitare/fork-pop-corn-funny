@@ -6,21 +6,22 @@ export const MENU_LIST: IMenuList[] =[
     {
         id: 'movie',
         name: 'movies',
+        url: '/movie',
         dropdownMenu: [
             {
                 id: 'movie_popular',
                 name: 'popular',
-                url: '/movie'
+                url: '/popular'
             },
             {
                 id: 'movie_top-rated',
                 name: 'top rated',
-                url: '/top-rated'
+                url: '/top_rated'
             },
             {
                 id: 'movie_now-playing',
                 name: 'now playing',
-                url: '/now-playing'
+                url: '/now_playing'
             },
             {
                 id: 'movie_upcoming',
@@ -32,32 +33,34 @@ export const MENU_LIST: IMenuList[] =[
     {
         id: 'tv',
         name: 'tv shows',
+        url: '/tv',
         dropdownMenu: [
             {
                 id: 'tv_popular',
                 name: 'popular',
-                url: '/tv'
+                url: '/popular'
             },
             {
                 id: 'tv_top-rated',
                 name: 'top rated',
-                url: '/top-rated'
+                url: '/top_rated'
             },
             {
                 id: 'tv_airing-today',
                 name: 'airing today',
-                url: '/airing-today'
+                url: '/airing_today'
             },
             {
                 id: 'tv_on-tv',
                 name: 'on tv',
-                url: '/on-tv'
+                url: '/on_tv'
             }
         ]
     },
     {
         id: 'people',
         name: 'people',
+        url: '/people',
         dropdownMenu: [{
             id: 'people_popular',
             name: 'popular',

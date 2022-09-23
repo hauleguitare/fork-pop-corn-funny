@@ -9,9 +9,9 @@ interface ILogoTextProps {
 const LogoText: React.FunctionComponent<ILogoTextProps> = (props) => {
   const { title, className } = props;
   return (
-    <a href={'/'} className={`${className} text-dark-smooth-brand font-merriweather font-bold`}>
+    <Link to={'/'} className={`${className} text-dark-smooth-brand font-merriweather font-bold`}>
       <p>{title}</p>
-    </a>
+    </Link>
   );
 };
 

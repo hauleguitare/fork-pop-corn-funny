@@ -4,7 +4,7 @@ export interface ISearchResult {
     first_air_date?:       Date;
     genre_ids?:            number[];
     id:                    number;
-    media_type:            MediaTypeSearch;
+    media_type:            string;
     name?:                 string;
     origin_country?:       string[];
     original_language?:    string;
@@ -30,7 +30,7 @@ export interface KnownFor {
     backdrop_path:     string;
     genre_ids:         number[];
     id:                number;
-    media_type:        MediaTypeSearch;
+    media_type:        string;
     original_language: string;
     original_title:    string;
     overview:          string;
@@ -40,12 +40,6 @@ export interface KnownFor {
     video:             boolean;
     vote_average:      number;
     vote_count:        number;
-}
-
-export enum MediaTypeSearch {
-    Movie = "movie",
-    Person = "person",
-    Tv = "tv",
 }
 
 
