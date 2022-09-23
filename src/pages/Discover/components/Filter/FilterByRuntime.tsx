@@ -1,7 +1,7 @@
 import useReadParams from '@src/hooks/useReadParams';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import './FilterByRuntime.module.css';
+import './FilterByRuntime.css';
 
 const MAX_RANGE = 200;
 const GAP_BETWEEN = 20;
@@ -70,17 +70,17 @@ const FilterByRunTime: React.FunctionComponent<IFilterByRunTimeProps> = (props) 
 
   return (
     <>
-      <p className="text-black text-xl py-2">Runtime</p>
+      <p className="text-xl py-2 text-white/80">Runtime</p>
       <div className="flex justify-between">
-        <span className="font-merriweather before:font-bold before:pr-2 before:text-black after:text-black after:pl-1 after:content-['min'] before:content-['From'] text-base text-black">
+        <span className="font-merriweather before:font-bold before:pr-2 before:text-dark-smooth-text-default after:text-dark-smooth-text-default after:pl-1 after:content-['min'] before:content-['From'] text-base text-dark-smooth-text-default">
           {minRange}
         </span>
-        <span className="font-merriweather before:font-bold before:pr-2 before:text-black after:text-black after:pl-1 after:content-['min'] before:content-['To'] text-base text-black">
+        <span className="font-merriweather before:font-bold before:pr-2 before:text-dark-smooth-text-default after:text-dark-smooth-text-default after:pl-1 after:content-['min'] before:content-['To'] text-base text-dark-smooth-text-default">
           {maxRange}
         </span>
       </div>
       <div className="relative my-4 pb-2">
-        <div ref={sliderRangeRef} className="absolute top-0 left-[0%] right-[0%] h-1 bg-blue-primary"></div>
+        <div ref={sliderRangeRef} className="absolute top-0 left-[0%] right-[0%] h-1 bg-dark-smooth-secondary"></div>
         <div className="relative">
           <input
             type="range"

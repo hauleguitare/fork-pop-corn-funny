@@ -31,7 +31,7 @@ const FilterByReleaseDate: React.FunctionComponent<IFilterByReleaseDateProps> = 
   return (
     <div className="flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <label htmlFor="from-date" className="text-xl font-merriweather">
+        <label htmlFor="from-date" className="text-xl font-merriweather text-dark-smooth-text-default">
           From
         </label>
         <input
@@ -39,12 +39,12 @@ const FilterByReleaseDate: React.FunctionComponent<IFilterByReleaseDateProps> = 
           id="from-date"
           name="from-date"
           value={searchParams.get('from') || '2018-01-01'}
-          className="text-white text-lg outline-none bg-stone-light-chocolate px-2 py-2 rounded-md"
+          className="text-white/80 text-lg outline-none bg-dark-smooth-on-surface px-2 py-2 rounded-md"
           onChange={handleOnChangeDate}
         />
       </div>
       <div className="flex justify-between items-center mb-4">
-        <label htmlFor="to-date" className="text-xl font-merriweather">
+        <label htmlFor="to-date" className="text-xl font-merriweather text-dark-smooth-text-default">
           To
         </label>
         <input
@@ -52,7 +52,7 @@ const FilterByReleaseDate: React.FunctionComponent<IFilterByReleaseDateProps> = 
           id="to-date"
           name="to-date"
           value={searchParams.get('to') || '2023-01-01'}
-          className="text-white text-lg outline-none bg-stone-light-chocolate px-2 py-2 rounded-md"
+          className="text-white/80 text-lg outline-none bg-dark-smooth-on-surface px-2 py-2 rounded-md"
           onChange={handleOnChangeDate}
         />
       </div>

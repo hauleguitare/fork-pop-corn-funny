@@ -11,9 +11,16 @@ interface ISortByProps {
 }
 
 const style: StylesConfig<IOption, false, GroupBase<IOption>> = {
-  container: (styl) => ({ ...styl, marginTop: '1rem', minWidth: '100%' }),
-  control: (styl) => ({ ...styl, cursor: 'pointer' }),
-  option: (styl) => ({ ...styl, cursor: 'pointer' }),
+  container: (styl) => ({ ...styl, marginTop: '1rem', minWidth: '100%', backgroundColor: '#1C1B1B' }),
+  singleValue: (styl) => ({ ...styl, color: '#CE93D8' }),
+  control: (styl) => ({ ...styl, cursor: 'pointer', backgroundColor: '#1C1B1B' }),
+  option: (styl) => ({
+    ...styl,
+    cursor: 'pointer',
+    color: '#DBD1D3',
+    ':hover': { backgroundColor: '#CE93D8', color: '#FAFAFA' },
+  }),
+  menuList: (styl) => ({ ...styl, backgroundColor: '#2B2929' }),
 };
 
 const SortBy: React.FunctionComponent<ISortByProps> = (props) => {
@@ -33,14 +40,17 @@ const SortBy: React.FunctionComponent<ISortByProps> = (props) => {
     }
   };
   return (
-    <div className="my-4 px-4 py-4 bg-white rounded-lg cursor-pointer" ref={parent as React.RefObject<HTMLDivElement>}>
+    <div
+      className="my-4 px-4 py-4 bg-dark-smooth-surface rounded-lg cursor-pointer"
+      ref={parent as React.RefObject<HTMLDivElement>}
+    >
       <div
         onClick={() => {
           setOpenSort(!openSort);
         }}
         className="flex flex-row justify-between"
       >
-        <p className="text-base">Sort</p>
+        <p className="text-xl text-white/80 dark">Sort</p>
         <span>
           <GrFormNext
             className={`${openSort ? 'rotate-90' : 'rotate-0'} h-full w-full transition-transform duration-[200ms]`}
@@ -49,7 +59,7 @@ const SortBy: React.FunctionComponent<ISortByProps> = (props) => {
       </div>
       {openSort && (
         <div className="pt-2">
-          <p className="cursor-text">Sort Results by</p>
+          <p className="cursor-text text-white/80">Sort Results by</p>
           <Select onChange={handleOnChange} options={options} styles={style} defaultValue={options[0]} />
         </div>
       )}

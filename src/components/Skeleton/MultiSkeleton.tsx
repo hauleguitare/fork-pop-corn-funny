@@ -20,7 +20,7 @@ const MultiSkeleton: React.FunctionComponent<IMultiSkeletonProps> = (props) => {
             width: widthCard,
             height: heightCard,
           }}
-          className={`${className} bg-stone-500 rounded-lg cursor-wait`}
+          className={`${className} bg-dark-smooth-surface rounded-lg cursor-wait`}
         />
       ))}
     </>

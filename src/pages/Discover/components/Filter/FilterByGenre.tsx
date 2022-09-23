@@ -3,7 +3,7 @@ import ListItem from '@src/components/ListItem';
 import useReadParams from '@src/hooks/useReadParams';
 import { GenreContext } from '@src/services/context/GenresProvider';
 import React, { useState } from 'react';
-import { GrFormNext } from 'react-icons/gr';
+import { MdNavigateNext } from 'react-icons/md';
 import { useSearchParams } from 'react-router-dom';
 
 interface IFilterByGenreProps {
@@ -41,9 +41,10 @@ const FilterByGenre: React.FunctionComponent<IFilterByGenreProps> = (props) => {
           setOpenfilterGenres(!isOpenfilterGenres);
         }}
       >
-        <p className="text-xl py-2">Genres Filter</p>
+        <p className="text-xl py-2 text-white/80">Genres Filter</p>
         <span>
-          <GrFormNext
+          <MdNavigateNext
+            color="white"
             className={`${
               isOpenfilterGenres ? 'rotate-90' : 'rotate-0'
             } h-full w-full transition-transform duration-[200ms]`}
@@ -66,7 +67,9 @@ const FilterByGenre: React.FunctionComponent<IFilterByGenreProps> = (props) => {
                         }}
                         key={item.id}
                         className={`${
-                          ReadParams['genre'].includes(item.id.toString()) ? 'bg-blue-primary' : ''
+                          ReadParams['genre'].includes(item.id.toString())
+                            ? 'bg-dark-smooth-primary/80'
+                            : 'bg-dark-smooth-button-default'
                         } py-2 px-2 mx-2 my-2 ring-2 ring-black rounded-full transition-all duration-150`}
                       >
                         {item.name}

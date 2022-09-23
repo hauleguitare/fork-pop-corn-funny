@@ -22,10 +22,10 @@ const GroupFilter: React.FunctionComponent<IGroupFilterProps> = (props) => {
     <div className="shrink-0 flex-nowrap up-tablet:pl-0 pl-4 pr-4 up-tablet:w-[298px] w-full">
       <SortBy options={OPTION_SORT} />
       <div
-        className="my-4 px-4 py-4 bg-white rounded-lg cursor-pointer"
+        className="my-4 px-4 py-4 bg-dark-smooth-surface rounded-lg cursor-pointer"
         ref={parent as React.RefObject<HTMLDivElement>}
       >
-        <p className="text-xl font-roboto py-2">Filter</p>
+        <p className="text-xl font-roboto py-2 text-white/80">Filter</p>
         <FilterGenres type={type} />
         <FilterByRuntime />
         <FilterByReleaseDate />
