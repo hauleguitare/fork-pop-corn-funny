@@ -17,7 +17,7 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
       <nav
         className={`${
           isOpenMenu ? 'translate-x-100%' : 'translate-x-[-100%]'
-        } fixed top-16 z-0 left-0 bottom-0 bg-dark-smooth-on-surface transition-transform duration-200 ease-in overflow-auto overflow-y-auto`}
+        } fixed top-16 z-0 left-0 bottom-0 bg-dark-smooth-on-surface transition-transform duration-200 ease-in overscroll-contain overflow-y-scroll`}
       >
         <div className="text-dark-smooth-text-default ml-4 mt-4 pr-8">
           <ul className="mx-4 mt-4 pb-2 border-b-2 border-b-stone-700 text-xl">
