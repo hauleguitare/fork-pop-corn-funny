@@ -1,18 +1,15 @@
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 import ListItem from '@src/components/ListItem';
 import LogoText from '@src/components/LogoText';
 import SearchBar from '@src/components/SearchBar';
 import { MENU_LIST } from '@src/constants';
 import { useScrollEvent } from '@src/hooks';
 import * as React from 'react';
-import { BiSearchAlt } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 interface IDesktopHeaderProps {}
 
 const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
   const [scrollPos] = useScrollEvent();
-  console.log(scrollPos);
 
   return (
     <header

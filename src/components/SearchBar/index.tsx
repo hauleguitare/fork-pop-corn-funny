@@ -1,7 +1,7 @@
 import { IParams } from '@src/@types/__global__';
 import { ISearchResult } from '@src/@types/__movies__';
 import { fetchSearch } from '@src/api';
-import React, { FormEvent, Fragment, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { BiMovie, BiSearchAlt } from 'react-icons/bi';
 import { BsPerson, BsTv } from 'react-icons/bs';
 import { IoIosClose } from 'react-icons/io';
@@ -108,6 +108,13 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = (props) => {
     setOpenSearch(false);
   };
 
+  const handleOnBlur = (e: React.FocusEvent) => {
+    if (!e.currentTarget?.contains(e.relatedTarget)) {
+      setSearchQuery('');
+      setOpenSearch(false);
+    }
+  };
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
@@ -152,7 +159,7 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = (props) => {
         <BiSearchAlt className="h-full w-full" />
       </button>
       {isSearch && (
-        <div className="absolute top-[64px] h-10 left-0 right-0 bg-white/80 text-black">
+        <div onBlur={handleOnBlur} className="absolute top-[64px] h-10 left-0 right-0 bg-white/80 text-black">
           <form onSubmit={handleOnSubmit} className="py-2 relative container">
             <input
               onChange={handleOnChange}
