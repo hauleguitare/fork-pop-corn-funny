@@ -8,7 +8,7 @@ interface IMobileHeaderProps {}
 const MobileHeader: React.FunctionComponent<IMobileHeaderProps> = (props) => {
   const [isOpenMenu, setOpenMenu] = useState(false);
   return (
-    <header className="h-16 bg-dark-smooth-surface text-white sticky top-0 left-0 right-0 z-10">
+    <header className="h-16 bg-dark-smooth-surface text-white sticky top-0 left-0 right-0 shadow-xl z-10">
       <div className="px-4 h-full flex justify-between items-center">
         <div>
           <LogoText className="text-2xl" />

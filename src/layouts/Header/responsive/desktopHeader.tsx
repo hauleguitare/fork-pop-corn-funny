@@ -12,10 +12,12 @@ interface IDesktopHeaderProps {}
 
 const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
   const [scrollPos] = useScrollEvent();
+  console.log(scrollPos);
+
   return (
     <header
-      className={`h-16 bg-dark-smooth-theme text-white sticky top-0 left-0 right-0 z-10 duration-150 transition-colors ease-linear hover:bg-dark-smooth-surface ${
-        scrollPos >= 10 ? 'bg-dark-smooth-surface' : 'bg-transparent'
+      className={`h-16 bg-dark-smooth-theme text-white sticky top-0 left-0 right-0 shadow-2xl z-10 duration-300 transition-colors ease-linear hover:bg-dark-smooth-surface ${
+        scrollPos >= 100 ? 'bg-dark-smooth-on-surface' : 'bg-transparent'
       }`}
     >
       <nav className="container opacity-80 flex justify-between items-center h-full">
