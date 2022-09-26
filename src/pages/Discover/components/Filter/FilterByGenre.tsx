@@ -1,7 +1,7 @@
 import { IGenre } from '@src/@types/__movies__';
 import ListItem from '@src/components/ListItem';
 import useReadParams from '@src/hooks/useReadParams';
-import { GenreContext } from '@src/services/context/GenresProvider';
+import { GenreContext } from '@src/services/context/Genres';
 import React, { useState } from 'react';
 import { MdNavigateNext } from 'react-icons/md';
 import { useSearchParams } from 'react-router-dom';

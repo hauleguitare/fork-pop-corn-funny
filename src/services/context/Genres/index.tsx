@@ -18,9 +18,6 @@ const GenresProvider: React.FunctionComponent<IGenresProviderProps> = (props) =>
     const getGenres = async () => {
       const movie = await fetchGenres('movie');
       const tv = await fetchGenres('tv');
-      // const all = [...movie.genres, ...tv.genres].filter((val, idx, arr) => {
-      //   return arr.findIndex((v) => v.id === val.id && v.name === val.name) === idx;
-      // });
       const all = [...movie.genres, ...tv.genres].filter((val, idx, arr) => {
         return arr.findIndex((v) => v.id === val.id && v.name === val.name) === idx;
       });

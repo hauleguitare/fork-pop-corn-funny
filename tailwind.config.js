@@ -1005,7 +1005,6 @@ module.exports = {
     'disabled',
   ],
   plugins: [
-    require('tailwind-scrollbar'),
   ],
 }
 

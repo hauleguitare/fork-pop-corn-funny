@@ -5,16 +5,18 @@ import { Field } from 'formik';
 import React, { Fragment } from 'react';
 import * as Yup from 'yup';
 
-interface IFormRegisterProps {}
+interface IFormRegisterProps {
+  onValidationSubmit: (dataSubmit: IDataSubmit) => void;
+}
 
-interface IInitialValues {
+export interface IDataSubmit {
   firstname: string;
   lastname: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
-const initialValues: IInitialValues = {
+const initialValues: IDataSubmit = {
   firstname: '',
   lastname: '',
   email: '',
@@ -23,7 +25,8 @@ const initialValues: IInitialValues = {
 };
 
 const FormRegister: React.FunctionComponent<IFormRegisterProps> = (props) => {
-  const ValidationSchema: Yup.SchemaOf<IInitialValues> = Yup.object().shape({
+  const { onValidationSubmit } = props;
+  const ValidationSchema: Yup.SchemaOf<IDataSubmit> = Yup.object().shape({
     firstname: Yup.string().required('required firstname'),
     lastname: Yup.string().required('required lastname'),
     email: Yup.string().email().required('required email'),
@@ -54,11 +57,14 @@ const FormRegister: React.FunctionComponent<IFormRegisterProps> = (props) => {
       .required('required confirm password')
       .oneOf([Yup.ref('password'), null], 'Confirm password must be match password'),
   });
+
   return (
     <FormContainer
       initialValues={initialValues}
       validationSchema={ValidationSchema}
-      onSubmit={(props) => console.log(props)}
+      onSubmit={(props) => {
+        onValidationSubmit(props as IDataSubmit);
+      }}
     >
       <Fragment>
         <FormGroup className="up-mobile:flex-row flex-col flex justify-between w-full">
@@ -108,7 +114,7 @@ const FormRegister: React.FunctionComponent<IFormRegisterProps> = (props) => {
           type="submit"
           className="text-dark-smooth-text-primary text-lg font-roboto flex justify-center w-full mt-8 mb-2 py-2 px-2 bg-gradient-to-bl to-dark-smooth-primary/60 via-dark-smooth-primary/75 from-dark-smooth-primary rounded-lg"
         >
-          Login
+          Sign Up
         </button>
       </Fragment>
     </FormContainer>

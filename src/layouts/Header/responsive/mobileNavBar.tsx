@@ -49,6 +49,9 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
                 <span>LOGIN</span>
               </Link>
             </li>
+            <li>
+              <button className="flex gap-4 items-center">LOG OUT</button>
+            </li>
           </ul>
           <MenuList
             list={MENU_LIST}

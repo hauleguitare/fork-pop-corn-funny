@@ -1,5 +1,5 @@
 import { IGenre } from '@src/@types/__movies__';
-import { IGenresContext } from '@src/services/context/GenresProvider';
+import { IGenresContext } from '@src/services/context/Genres';
 import React, { useEffect, useState } from 'react';
 
 interface IListGenresProps {

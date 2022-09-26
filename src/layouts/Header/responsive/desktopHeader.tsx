@@ -1,14 +1,18 @@
 import ListItem from '@src/components/ListItem';
 import LogoText from '@src/components/LogoText';
+import ProfileNavBar from '@src/components/ProfileNavBar';
 import SearchBar from '@src/components/SearchBar';
 import { MENU_LIST } from '@src/constants';
 import { useScrollEvent } from '@src/hooks';
-import * as React from 'react';
+import { useAuth } from '@src/services/context/Auth';
+import { SignOut } from '@src/services/Firebase/Auth/SignOut/SignOut';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 interface IDesktopHeaderProps {}
 
 const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
+  const CurrentUser = useAuth();
   const [scrollPos] = useScrollEvent();
 
   return (
@@ -19,9 +23,9 @@ const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
     >
       <nav className="container opacity-80 flex justify-between items-center h-full">
         <LogoText title="POPCORN" className="text-3xl" />
-        <div className="flex shrink">
+        <div className="flex shrink items-center">
           <ListItem
-            className="flex mr-[46px] gap-6 capitalize cursor-pointer"
+            className="flex mx-4 gap-6 capitalize cursor-pointer"
             items={MENU_LIST}
             renderItem={(item) => (
               <li key={item.id} className="group relative">
@@ -38,9 +42,22 @@ const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
               </li>
             )}
           />
-          <div className="flex items-center gap-4">
+          <div className="flex mx-4">
             <SearchBar />
-            <p>Login</p>
+          </div>
+          <div className="flex ml-4 gap-4 relative">
+            {CurrentUser ? (
+              <ProfileNavBar displayName={CurrentUser.displayName} photoURL={CurrentUser.photoURL} />
+            ) : (
+              <Fragment>
+                <Link to={'/login'} className="bg-dark-smooth-primary/80 px-2 py-1 rounded-lg">
+                  Log in
+                </Link>
+                <Link to={'/signup'} className="bg-blue-primary/80 t px-2 py-1 rounded-lg">
+                  Sign up
+                </Link>
+              </Fragment>
+            )}
           </div>
         </div>
       </nav>

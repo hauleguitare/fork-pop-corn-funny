@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  @apply w-[8px] h-[8px];
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-smooth-theme;
+}
+
+::-webkit-scrollbar-button {
+  @apply hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-smooth-on-surface rounded-full hover:bg-white/40 transition duration-300;
+}

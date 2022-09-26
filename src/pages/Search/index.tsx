@@ -1,6 +1,7 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ICallBackStatusProps } from '@src/@types/__global__';
 import ExplorerSeach from '@src/asserts/svg/explorer_search.svg';
+import MotionChangePage from '@src/components/MotionChangePage';
 import { SELECT_TYPE } from '@src/constants/seach-page';
 import { motion } from 'framer-motion';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -39,64 +40,66 @@ const SearchPage: React.FunctionComponent<ISearchPageProps> = (props) => {
   };
 
   return (
-    <main ref={parentRef} className="container mt-4 max-w-[1280px] px-4 up-mobile:px-0  min-h-[500px]">
-      {searchParams.get('query') === null && (
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: '-100%',
-          }}
-          animate={{
-            opacity: 1,
-            y: '0',
-          }}
-          transition={{
-            duration: 0.75,
-          }}
-          className="flex justify-center flex-col"
-        >
-          <p className="font-merriweather text-2xl up-mobile:text-4xl py-4 bg-gradient-to-bl to-dark-smooth-primary/40 via-dark-smooth-primary/75 from-dark-smooth-primary text-center text-dark-smooth-text-primary rounded-lg">
-            Welcome to Search Page, enjoy the movies you excited. Cheer!
-          </p>
-          <img src={ExplorerSeach} alt="" className="mt-16 mb-4" />
-        </motion.div>
-      )}
-      <div className="flex justify-center">
-        <form
-          onSubmit={handleOnSubmit}
-          className="text-white/80 h-14 relative bg-dark-smooth-surface flex items-center rounded-xl overflow-hidden w-full"
-        >
-          <button
-            onSubmit={handleOnSubmit}
-            className="absolute top-0 h-full px-2 bg-dark-smooth-on-surface text-dark-smooth-text-default z-0"
+    <MotionChangePage>
+      <div ref={parentRef} className="container mt-4 max-w-[1280px] px-4 up-mobile:px-0  min-h-[500px]">
+        {searchParams.get('query') === null && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: '-100%',
+            }}
+            animate={{
+              opacity: 1,
+              y: '0',
+            }}
+            transition={{
+              duration: 0.75,
+            }}
+            className="flex justify-center flex-col"
           >
-            Search
-          </button>
-          <input
-            onChange={handleOnChangeInput}
-            value={decodeURIComponent(searchInput)}
-            type={'text'}
-            className="pl-20 pr-4 text-xl w-full outline-none bg-transparent"
-          />
-        </form>
-      </div>
-      <div className="flex justify-center">
-        <div className="flex flex-row justify-between gap-4 mt-2">
-          {SELECT_TYPE.map((item) => (
+            <p className="font-merriweather text-2xl up-mobile:text-4xl py-4 bg-gradient-to-bl to-dark-smooth-primary/40 via-dark-smooth-primary/75 from-dark-smooth-primary text-center text-dark-smooth-text-primary rounded-lg">
+              Welcome to Search Page, enjoy the movies you excited. Cheer!
+            </p>
+            <img src={ExplorerSeach} alt="" className="mt-16 mb-4" />
+          </motion.div>
+        )}
+        <div className="flex justify-center">
+          <form
+            onSubmit={handleOnSubmit}
+            className="text-white/80 h-14 relative bg-dark-smooth-surface flex items-center rounded-xl overflow-hidden w-full"
+          >
             <button
-              onClick={() => setType(item.id.toString())}
-              key={item.id}
-              className={`${
-                item.id === type ? 'bg-dark-smooth-primary' : 'bg-dark-smooth-button-default'
-              } px-2 py-2 rounded-lg hover:bg-dark-smooth-button-hover transition-colors duration-150`}
+              onSubmit={handleOnSubmit}
+              className="absolute top-0 h-full px-2 bg-dark-smooth-on-surface text-dark-smooth-text-default z-0"
             >
-              {item.name}
+              Search
             </button>
-          ))}
+            <input
+              onChange={handleOnChangeInput}
+              value={decodeURIComponent(searchInput)}
+              type={'text'}
+              className="pl-20 pr-4 text-xl w-full outline-none bg-transparent"
+            />
+          </form>
         </div>
+        <div className="flex justify-center">
+          <div className="flex flex-row justify-between gap-4 mt-2">
+            {SELECT_TYPE.map((item) => (
+              <button
+                onClick={() => setType(item.id.toString())}
+                key={item.id}
+                className={`${
+                  item.id === type ? 'bg-dark-smooth-primary' : 'bg-dark-smooth-button-default'
+                } px-2 py-2 rounded-lg hover:bg-dark-smooth-button-hover transition-colors duration-150`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </div>
+        {submitQuery && <QueryResults type={type} params={{ query: decodeURIComponent(submitQuery) }} />}
       </div>
-      {submitQuery && <QueryResults type={type} params={{ query: decodeURIComponent(submitQuery) }} />}
-    </main>
+    </MotionChangePage>
   );
 };
 

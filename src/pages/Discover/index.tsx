@@ -1,4 +1,5 @@
 import { IParams } from '@src/@types/__global__';
+import MotionChangePage from '@src/components/MotionChangePage';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import GroupFilter from './components/Filter/GroupFilter';
@@ -31,10 +32,12 @@ const DiscoverPage: React.FunctionComponent<IDiscoverPageProps> = (props) => {
     ParseParams('release_date.lte', searchParams.get('to') || '2023-01-01');
   }, [location.search]);
   return (
-    <div className="container mt-4 max-w-[1280px] flex flex-col up-tablet:flex-row overflow-hidden">
-      <GroupFilter type={type} />
-      <QueryResults type={type} params={currentParams} />
-    </div>
+    <MotionChangePage>
+      <div className="container mt-4 max-w-[1280px] flex flex-col up-tablet:flex-row overflow-hidden">
+        <GroupFilter type={type} />
+        <QueryResults type={type} params={currentParams} />
+      </div>
+    </MotionChangePage>
   );
 };
 
