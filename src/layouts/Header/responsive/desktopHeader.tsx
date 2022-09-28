@@ -4,15 +4,14 @@ import ProfileNavBar from '@src/components/ProfileNavBar';
 import SearchBar from '@src/components/SearchBar';
 import { MENU_LIST } from '@src/constants';
 import { useScrollEvent } from '@src/hooks';
-import { useAuth } from '@src/services/context/Auth';
-import { SignOut } from '@src/services/Firebase/Auth/SignOut/SignOut';
+import { useUserData } from '@src/services/context/UserData';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 interface IDesktopHeaderProps {}
 
 const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
-  const CurrentUser = useAuth();
+  const CurrentUser = useUserData();
   const [scrollPos] = useScrollEvent();
 
   return (

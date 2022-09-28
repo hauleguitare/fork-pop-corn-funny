@@ -32,7 +32,11 @@ const ProfileNavBar: React.FunctionComponent<IProfileNavBarProps> = (props) => {
       onClick={() => setClick(!isClick)}
       className="flex items-center gap-4 relative cursor-pointer"
     >
-      <img src={photoURL ?? GuestProfile} className="max-h-10 rounded-full" referrerPolicy="no-referrer" />
+      <img
+        src={photoURL ?? GuestProfile}
+        className="h-10 w-10 rounded-full object-cover"
+        referrerPolicy="no-referrer"
+      />
       <p className="font-roboto text-white/80">{displayName ?? ''}</p>
       {isClick && (
         <div className="absolute right-0 min-w-max top-[110%] bg-white">
