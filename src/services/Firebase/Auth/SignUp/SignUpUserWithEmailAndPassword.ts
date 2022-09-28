@@ -1,4 +1,3 @@
-import { IDataUser } from "@src/@types/__global__";
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth } from "../..";

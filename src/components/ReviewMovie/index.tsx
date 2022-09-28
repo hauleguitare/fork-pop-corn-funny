@@ -1,7 +1,7 @@
 import FallBackBackdrop from '@src/asserts/images/fallback_backdrop.png';
 import useCurrentViewPort from '@src/hooks/useCurrentViewPort';
 import { GenreContext } from '@src/services/context/Genres';
-import { removeReview } from '@src/services/Slices/reviewMovieSlice';
+import { removeReview } from '@src/services/Store/slices/reviewMovieSlice';
 import { RootState } from '@src/services/Store';
 import React, { Fragment, useEffect, useState } from 'react';
 import { GrFormPrevious } from 'react-icons/gr';

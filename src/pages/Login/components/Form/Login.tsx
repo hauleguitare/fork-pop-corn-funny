@@ -1,24 +1,27 @@
-import { Field, Formik } from 'formik';
+import { Field } from 'formik';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import FormContainer from '../../../../components/FormContainer';
 import InputField from '../../../../components/InputField';
 
-interface IFormLoginProps {}
+interface IFormLoginProps {
+  onValidationSubmit: (dataSubmit: IDataSubmit) => void;
+}
 
-interface IInitialValues {
+export interface IDataSubmit {
   email: string;
   password: string;
 }
 
-const initialValues: IInitialValues = {
+const initialValues: IDataSubmit = {
   email: '',
   password: '',
 };
 
 const FormLogin: React.FunctionComponent<IFormLoginProps> = (props) => {
-  const validationSchema: Yup.SchemaOf<IInitialValues> = Yup.object().shape({
+  const { onValidationSubmit } = props;
+  const validationSchema: Yup.SchemaOf<IDataSubmit> = Yup.object().shape({
     email: Yup.string().email().required('required email'),
     password: Yup.string().required('required password'),
   });
@@ -27,7 +30,7 @@ const FormLogin: React.FunctionComponent<IFormLoginProps> = (props) => {
     <FormContainer
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(props) => console.log(props)}
+      onSubmit={(props) => onValidationSubmit(props as IDataSubmit)}
     >
       <Fragment>
         <Field

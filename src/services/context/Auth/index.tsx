@@ -18,13 +18,15 @@ const AuthProvider: React.FunctionComponent<IAuthProviderProps> = (props) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (result) => {
       setCurrentUser(result);
-      if (result) {
-        const access_token = await result.getIdToken();
-        localStorage.setItem('access_token', access_token);
+      if (!result) {
+        return;
       }
+      const access_token = await result.getIdToken();
+      localStorage.setItem('access_token', access_token);
     });
     return () => unSubscribe();
   }, []);
+
   return <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>;
 };
 

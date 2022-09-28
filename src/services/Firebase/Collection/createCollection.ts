@@ -1,25 +1,27 @@
-import { IDataUser } from "@src/@types/__global__";
+import { IUserData } from "@src/@types/__global__";
 import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from ".."
 
 
-export const createCollection = async (user_data: User) => {
-    const refDoc = doc(db, 'users', user_data.uid);
+export const createCollection = async (user: User) => {
+    console.log('userid: ', user.uid);
+    const refDoc = doc(db, 'users', user.uid);
     const docSnap = await getDoc(refDoc);
     if (docSnap.exists()){
         return;
     }
-    const dataUser: IDataUser = {
-        uid: user_data.uid,
-        displayName: user_data.displayName ?? '',
-        email: user_data.email as string,
-        photoURL: user_data.photoURL ?? ''
+    const dataUser: IUserData = {
+        uid: user.uid,
+        displayName: user.displayName ?? '',
+        email: user.email as string,
+        photoURL: user.photoURL ?? '',
+        watchlist: [],
+        recently: [],
+        bannerURL: ''
       }
     setDoc(refDoc, {
         ...dataUser,
-        watchlist: [],
-        history: []
     }).catch(error => {
         console.log(error)
     })

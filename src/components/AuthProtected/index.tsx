@@ -9,7 +9,6 @@ interface IAuthProtectedProps {
 
 const AuthProtected: React.FunctionComponent<IAuthProtectedProps> = (props) => {
   const { children, hasLogin, redirectTo } = props;
-  console.log(hasLogin);
   if (!hasLogin) {
     return (
       <Fragment>

@@ -17,3 +17,7 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-dark-smooth-on-surface rounded-full hover:bg-white/40 transition duration-300;
 }
+
+button{
+  -webkit-tap-highlight-color: transparent;
+}

@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-interface IFormGroupProps {
+interface IFormGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   className?: string;
 }
 
 const FormGroupRenderFn: React.ForwardRefRenderFunction<HTMLDivElement, IFormGroupProps> = (props, ref) => {
-  const { children, className } = props;
+  const { children, className, ...other } = props;
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} {...other}>
       {children}
     </div>
   );

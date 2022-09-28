@@ -6,7 +6,7 @@ import Card from '@src/components/Card';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { ICategory } from '@src/@types/__global__';
 import { useDispatch } from 'react-redux';
-import { activeReview } from '@src/services/Slices/reviewMovieSlice';
+import { activeReview } from '@src/services/Store/slices/reviewMovieSlice';
 
 interface IContentSliderProps {
   data: IAbstractMovie[];

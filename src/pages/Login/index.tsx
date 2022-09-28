@@ -1,6 +1,7 @@
 import LogoText from '@src/components/LogoText';
 import MotionChangePage from '@src/components/MotionChangePage';
-import FormLogin from '@src/pages/Login/components/Form/Login';
+import FormLogin, { IDataSubmit } from '@src/pages/Login/components/Form/Login';
+import { SignInUserWithEmailAndPassWord } from '@src/services/Firebase/Auth/SignIn/SignInUserWithEmailAndPassWord';
 import { SignInWithFacebook, SignInWithGoogle } from '@src/services/Firebase/Auth/SignIn/SignInWithProvider';
 import * as React from 'react';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
@@ -10,6 +11,16 @@ import * as Yup from 'yup';
 interface ILoginPageProps {}
 
 const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
+  const handleOnSubmit = async (dataSubmit: IDataSubmit) => {
+    SignInUserWithEmailAndPassWord(dataSubmit.email, dataSubmit.password)
+      .then((res) => {
+        console.log('response signin: ', res);
+      })
+      .catch((error) => {
+        console.log("can't not sign in with gmail and password, please try again", error);
+      });
+  };
+
   return (
     <MotionChangePage>
       <div className="w-full text-white container min-h-screen">
@@ -20,7 +31,7 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
           </div>
 
           {/* <FormLogin /> */}
-          <FormLogin />
+          <FormLogin onValidationSubmit={handleOnSubmit} />
           <div className="flex justify-center mt-2">
             <span>
               Not member account, sign up{' '}
