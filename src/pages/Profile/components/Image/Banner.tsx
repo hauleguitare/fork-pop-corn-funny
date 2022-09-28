@@ -18,20 +18,21 @@ const ProfileBanner: React.FunctionComponent<IProfileBannerProps> = (props) => {
   // Handle Event
   const handleOnChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const tempListData = e.currentTarget.files;
-    if (tempListData) {
-      const formData = new FormData();
-      formData.append('image', tempListData[0]);
-      try {
-        setLoadingUpdate(true);
-        const res = await uploadImage(formData);
-        updateFieldDocument(userData.uid, 'users', 'bannerURL', res.data.link).catch((error) => {
-          console.log("can't not update image: ", error);
-        });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoadingUpdate(false);
-      }
+    if (!tempListData) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', tempListData[0]);
+    try {
+      setLoadingUpdate(true);
+      const res = await uploadImage(formData);
+      updateFieldDocument(userData.uid, 'users', 'bannerURL', res.data.link).catch((error) => {
+        console.log("can't not update image: ", error);
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingUpdate(false);
     }
   };
 
@@ -54,13 +55,13 @@ const ProfileBanner: React.FunctionComponent<IProfileBannerProps> = (props) => {
             </div>
           )}
           <label
-            htmlFor="upload-avatar"
+            htmlFor="upload-banner"
             className="absolute bottom-0 right-0 opacity-60 mx-2 my-2 flex items-center bg-dark-smooth-button-default px-2 py-1 rounded-full gap-2"
           >
             <p>Upload image</p>
             <BsImages />
           </label>
-          <input onChange={handleOnChangeImage} id="upload-avatar" type={'file'} accept="image/*" className="hidden" />
+          <input onChange={handleOnChangeImage} id="upload-banner" type={'file'} accept="image/*" className="hidden" />
         </Fragment>
       )}
     </div>

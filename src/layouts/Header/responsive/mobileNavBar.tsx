@@ -1,6 +1,6 @@
 import MenuList from '@src/components/MenuList';
 import { MENU_LIST } from '@src/constants/index';
-import React, { Fragment } from 'react';
+import React, { FocusEventHandler, Fragment, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
 import { RiCompassDiscoverFill, RiLoginBoxFill } from 'react-icons/ri';
@@ -12,9 +12,30 @@ interface IMobileNavBarProps {
 
 const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
   const { isOpenMenu, setOpenMenu } = props;
+  const navRef = useRef<HTMLDivElement>(null);
+
+  // Handle Event
+  const handleOnBlur = (e: React.FocusEvent<HTMLElement, Element>) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setOpenMenu(!isOpenMenu);
+    }
+  };
+
+  // Use Effect
+  useEffect(() => {
+    if (navRef) {
+      if (isOpenMenu) {
+        navRef.current?.focus();
+      }
+    }
+  }, [isOpenMenu]);
+
   return (
     <Fragment>
       <nav
+        ref={navRef}
+        onBlur={handleOnBlur}
+        tabIndex={0}
         className={`${
           isOpenMenu ? 'translate-x-100%' : 'translate-x-[-100%]'
         } fixed top-16 z-0 left-0 bottom-0 bg-dark-smooth-on-surface transition-transform duration-200 ease-in overscroll-contain overflow-y-scroll`}
@@ -61,9 +82,9 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
         </div>
       </nav>
       <div
-        onClick={() => {
-          setOpenMenu(!isOpenMenu);
-        }}
+        // onClick={() => {
+        //   setOpenMenu(!isOpenMenu);
+        // }}
         className={`${
           isOpenMenu ? 'visible bg-white/30' : 'invisible bg-transparent'
         } fixed top-16 left-0 right-0 bottom-0 -z-10 transition-all ease-linear duration-75`}

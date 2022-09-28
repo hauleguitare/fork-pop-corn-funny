@@ -20,7 +20,6 @@ const ProfileNavBar: React.FunctionComponent<IProfileNavBarProps> = (props) => {
   // Handle Event
 
   const handleOnBlur = (e: React.FocusEvent) => {
-    console.log('on blur header: ');
     if (!e.currentTarget?.contains(e.relatedTarget)) {
       setClick(false);
     }
