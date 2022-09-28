@@ -13,18 +13,21 @@ import RegisterPage from './Register';
 import SearchPage from './Search';
 import TestPage from './Test';
 
-interface IClientRoutesProps {}
+interface IClientRoutesProps {
+  isLoggedIn: boolean;
+}
 const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
+  const { isLoggedIn } = props;
   const auth = useAuth();
-  const [isLoggedIn, setLoggedIn] = useState(auth ? true : false);
+  // const [isLoggedIn, setLoggedIn] = useState(true);
 
-  useEffect(() => {
-    if (auth) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth) {
+  //     setLoggedIn(true);
+  //   } else {
+  //     setLoggedIn(false);
+  //   }
+  // }, [auth]);
 
   console.log(isLoggedIn);
   return (
