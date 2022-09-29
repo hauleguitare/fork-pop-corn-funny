@@ -1,19 +1,19 @@
 import FormGroup from '@src/components/FormGroup';
-import Input from '@src/components/Input';
+import { FieldProps } from 'formik';
 import * as React from 'react';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { CgUndo } from 'react-icons/cg';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 interface ISecretFieldProps {
-  initialValue: string;
   type: React.HTMLInputTypeAttribute;
   label: string;
   access?: boolean;
 }
 
-const SecretField: React.FunctionComponent<ISecretFieldProps> = (props) => {
-  const { initialValue, type, label, access } = props;
+const SecretField: React.FunctionComponent<ISecretFieldProps & FieldProps> = (props) => {
+  const { type, label, access, field, form } = props;
+  const { name, value, onChange, onBlur } = field;
+  const { errors, touched } = form;
+  const showError = errors[name] && touched[name];
   const [updateField, setUpdateField] = React.useState(false);
   const [visiblePassword, setVisiblePassword] = React.useState(false);
   const ref = React.useRef<HTMLInputElement>(null);
@@ -39,63 +39,64 @@ const SecretField: React.FunctionComponent<ISecretFieldProps> = (props) => {
   };
 
   const handleOnClickVisible = () => {
-    if (ref.current) {
-      setVisiblePassword(true);
-      // ref.current.type = 'text';
-    }
+    setVisiblePassword(true);
   };
 
   const handleOnClickInVisible = () => {
-    if (ref.current) {
-      setVisiblePassword(false);
-      // ref.current.type = 'password';
-    }
+    setVisiblePassword(false);
   };
 
   const handleOnClickEdit = () => {
     setUpdateField(true);
-  };
-
-  const handleOnClickUndo = (e: React.MouseEvent) => {
-    if (ref.current) {
-      ref.current.value = initialValue;
-      setUpdateField(false);
-    }
   };
   if (!access) {
     return null;
   }
 
   return (
-    <FormGroup onBlur={handleOnBlurInput}>
-      <Input ref={ref} type={type} label={label} background="bg-dark-smooth-on-surface" defaultValue={initialValue}>
+    <FormGroup onBlur={handleOnBlurInput} className="flex flex-col py-2 px-2">
+      <label className="pb-2 text-dark-smooth-text-default/80">{label}</label>
+      <div className="relative">
+        <input
+          ref={ref}
+          type={type}
+          value={value}
+          placeholder={'New password'}
+          name={name}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={`py-2 pl-2 bg-dark-smooth-on-surface rounded-md shadow-md outline-none w-full`}
+        />
         <React.Fragment>
           {visiblePassword ? (
-            <button onClick={handleOnClickInVisible} className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10">
+            <button
+              type="button"
+              onClick={handleOnClickInVisible}
+              className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10"
+            >
               <MdVisibilityOff className="w-full h-full" />
             </button>
           ) : (
-            <button onClick={handleOnClickVisible} className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10">
+            <button
+              type="button"
+              onClick={handleOnClickVisible}
+              className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10"
+            >
               <MdVisibility className="w-full h-full" />
             </button>
           )}
         </React.Fragment>
-        {!updateField ? (
+        {!updateField && (
           <button
+            type="button"
             onClick={handleOnClickEdit}
             className="pb-2 px-1 justify-end right-0 top-0 absolute -translate-y-full rounded-lg text-red-600 focus:text-red-400 duration-150 transition-colors"
           >
             Change
           </button>
-        ) : (
-          <button
-            onClick={handleOnClickUndo}
-            className="pb-2 px-1 justify-end right-0 top-0 absolute -translate-y-full rounded-lg text-dark-smooth-primary focus:text-red-400 duration-150 transition-colors"
-          >
-            Undo
-          </button>
         )}
-      </Input>
+      </div>
+      {showError ? <label className="text-sm text-red-400 italic">{errors[name]?.toString()}</label> : undefined}
     </FormGroup>
   );
 };

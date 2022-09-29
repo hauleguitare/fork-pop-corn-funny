@@ -36,7 +36,7 @@ const FormRegister: React.FunctionComponent<IFormRegisterProps> = (props) => {
       .test(
         'isValidPassWord',
         'is not valid password, A valid password consists of uppercase, characters, numbers and lower letters',
-        (value, context) => {
+        (value) => {
           const hasValid = [];
           const hasUpperCase = /[A-Z]/.test(value ?? '');
           const hasNumber = /[0-9]/.test(value ?? '');

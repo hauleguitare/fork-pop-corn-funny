@@ -1,7 +1,7 @@
 import { uploadImage } from '@src/api/uploadImage';
 import { useUserData } from '@src/services/context/UserData';
 import { updateFieldDocument } from '@src/services/Firebase/Collection/updateDocument';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { BsImages } from 'react-icons/bs';
 import { FaSpinner } from 'react-icons/fa';
 
@@ -39,7 +39,7 @@ const ProfileBanner: React.FunctionComponent<IProfileBannerProps> = (props) => {
   return (
     <div className="relative">
       <img
-        className="h-[175px] min-w-full object-cover"
+        className="h-[175px] up-mobile:h-full max-h-[400px] min-w-full object-cover"
         src={
           userData.bannerURL
             ? userData.bannerURL

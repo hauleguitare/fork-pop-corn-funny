@@ -8,7 +8,7 @@ const ProfileImage: React.FunctionComponent<IProfileImageProps> = (props) => {
   return (
     <div className="relative">
       <ProfileBanner access />
-      <ProfileAvatar />
+      <ProfileAvatar access />
     </div>
   );
 };

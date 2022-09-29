@@ -15,10 +15,12 @@ export const useAuth = () => {
 const AuthProvider: React.FunctionComponent<IAuthProviderProps> = (props) => {
   const { children } = props;
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  console.log(currentUser);
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (result) => {
       setCurrentUser(result);
       if (!result) {
+        localStorage.clear();
         return;
       }
       const access_token = await result.getIdToken();

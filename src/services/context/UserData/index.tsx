@@ -1,6 +1,6 @@
 import { IUserData } from '@src/@types/__global__';
 import { db } from '@src/services/Firebase';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import * as React from 'react';
 import { useAuth } from '../Auth';
 

@@ -5,6 +5,7 @@ export interface IUserData {
     photoURL: string,
     bannerURL: string,
     recently: any[],
-    watchlist: any[]
+    watchlist: any[],
+    description: string
 
 }

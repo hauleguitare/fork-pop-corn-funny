@@ -1,23 +1,23 @@
 import FormGroup from '@src/components/FormGroup';
-import Input from '@src/components/Input';
+import { FieldProps } from 'formik';
 import * as React from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { CgUndo } from 'react-icons/cg';
 
 interface IPublicFieldProps {
-  initialValue: string;
   type: React.HTMLInputTypeAttribute;
   label: string;
-  accessEdit?: boolean;
+  access?: boolean;
   className?: string;
 }
 
-const PublicField: React.FunctionComponent<IPublicFieldProps> = (props) => {
-  const { initialValue, type, label, accessEdit, className } = props;
+const PublicField: React.FunctionComponent<IPublicFieldProps & FieldProps> = (props) => {
+  const { type, label, access, className, field, form } = props;
+  const { name, value, onChange, onBlur } = field;
+  const { errors, touched } = form;
+  const showError = errors[name] && touched[name];
   const [updateField, setUpdateField] = React.useState(false);
-  const [defaultValue, setDefaulValue] = React.useState(initialValue);
   const ref = React.useRef<HTMLInputElement>(null);
-
   React.useEffect(() => {
     if (ref.current) {
       ref.current.disabled = !updateField;
@@ -37,36 +37,40 @@ const PublicField: React.FunctionComponent<IPublicFieldProps> = (props) => {
     setUpdateField(true);
   };
 
-  const handleOnClickUndo = (e: React.MouseEvent) => {
-    if (ref.current) {
-      ref.current.value = defaultValue;
-      setUpdateField(false);
-    }
-  };
-
   return (
     <FormGroup onBlur={handleOnBlurInput} className={className}>
-      <Input ref={ref} type={type} label={label} background="bg-dark-smooth-on-surface" defaultValue={defaultValue}>
-        {accessEdit && (
+      <label className="pb-2">{label}</label>
+      <div className="relative">
+        <input
+          ref={ref}
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={`bg-dark-smooth-on-surface outline-none py-2 px-2 text-dark-smooth-text-default rounded-lg w-full`}
+        />
+        {access && (
           <React.Fragment>
-            {!updateField ? (
-              <button onClick={handleOnClickEdit} className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10">
+            {!updateField && (
+              <button
+                type="button"
+                onClick={handleOnClickEdit}
+                className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10"
+              >
                 <AiOutlineEdit className="w-full h-full" />
-              </button>
-            ) : (
-              <button onClick={handleOnClickUndo} className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10">
-                <CgUndo className="w-full h-full" />
               </button>
             )}
           </React.Fragment>
         )}
-      </Input>
+      </div>
+      {showError ? <label className="text-sm text-red-400 italic">{errors[name]?.toString()}</label> : undefined}
     </FormGroup>
   );
 };
 
 PublicField.defaultProps = {
-  accessEdit: false,
+  access: false,
 };
 
 export default PublicField;

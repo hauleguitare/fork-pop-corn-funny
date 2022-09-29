@@ -1,8 +1,9 @@
 import { uploadImage } from '@src/api/uploadImage';
+import GuestProfile from '@src/asserts/images/guest_profile.png';
 import { useUserData } from '@src/services/context/UserData';
 import { updateFieldDocument } from '@src/services/Firebase/Collection/updateDocument';
 import * as React from 'react';
-import GuestProfile from '@src/asserts/images/guest_profile.png';
+import { FaSpinner } from 'react-icons/fa';
 
 interface IProfileAvatarProps {
   access?: boolean;
@@ -45,13 +46,29 @@ const ProfileAvatar: React.FunctionComponent<IProfileAvatarProps> = (props) => {
         referrerPolicy="no-referrer"
         className="object-cover w-full h-full"
       />
-      <input onChange={handleOnChangeImage} type={'file'} id={'upload-avatar'} accept={'image/*'} className="hidden" />
-      <label
-        htmlFor="upload-avatar"
-        className="flex flex-col items-center justify-center cursor-pointer absolute bottom-0 top-full bg-dark-smooth-on-surface/80 w-full h-full rounded-full group-hover:-translate-y-[100%] ease-in transition-transform duration-150"
-      >
-        <span>Upload</span>
-      </label>
+
+      {access && (
+        <React.Fragment>
+          <input
+            onChange={handleOnChangeImage}
+            type={'file'}
+            id={'upload-avatar'}
+            accept={'image/*'}
+            className="hidden"
+          />
+          <label
+            htmlFor="upload-avatar"
+            className="flex flex-col items-center justify-center cursor-pointer absolute bottom-0 top-full bg-dark-smooth-on-surface/80 w-full h-full rounded-full group-hover:-translate-y-[100%] ease-in transition-transform duration-150"
+          >
+            <span>Upload</span>
+          </label>
+          {isLoadingUpdate && (
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-8 h-8">
+              <FaSpinner className="animate-spin w-full h-full" color="#78716c" />
+            </div>
+          )}
+        </React.Fragment>
+      )}
     </div>
   );
 };

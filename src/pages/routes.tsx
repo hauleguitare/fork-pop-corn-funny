@@ -1,8 +1,5 @@
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 import AuthProtected from '@src/components/AuthProtected';
-import { useAuth } from '@src/services/context/Auth';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import DiscoverPage from './Discover';
 import HomePage from './Home';

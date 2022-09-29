@@ -1,8 +1,8 @@
-import React, { Fragment, useRef, useState } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import GuestProfile from '@src/asserts/images/guest_profile.png';
 import { SignOut } from '@src/services/Firebase/Auth/SignOut/SignOut';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 interface IProfileNavBarProps {
   displayName?: string | null;

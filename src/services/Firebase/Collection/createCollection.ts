@@ -18,7 +18,8 @@ export const createCollection = async (user: User) => {
         photoURL: user.photoURL ?? '',
         watchlist: [],
         recently: [],
-        bannerURL: ''
+        bannerURL: '',
+        description: "Something about me"
       }
     setDoc(refDoc, {
         ...dataUser,

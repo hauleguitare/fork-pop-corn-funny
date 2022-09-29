@@ -9,20 +9,31 @@ interface IFormContainerProps<T> {
   validationSchema: Yup.SchemaOf<T>; // i using schema from yup
   onSubmit: (props: T) => void; // handle onSubmit when passing yup
   children?: React.ReactNode;
+  className?: string;
 }
 
 // I using generic to reuse component with formik
 function FormContainer<T extends FormikValues>(props: IFormContainerProps<T>): JSX.Element {
-  const { initialValues, validationSchema, onSubmit, children } = props;
+  const { initialValues, validationSchema, onSubmit, children, className } = props;
   return (
-    <Formik validationSchema={validationSchema} initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      enableReinitialize={true}
+      validationSchema={validationSchema}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+    >
       {(props) => (
-        <div className="text-white/80 relative bg-dark-smooth-surface rounded-lg overflow-hidden w-full py-4 px-2">
+        <div
+          className={`${
+            className
+              ? className
+              : 'text-white/80 relative bg-dark-smooth-surface rounded-lg overflow-hidden w-full py-4 px-2'
+          } `}
+        >
           <Form>{children}</Form>
         </div>
       )}
     </Formik>
   );
 }
-
 export default FormContainer;
