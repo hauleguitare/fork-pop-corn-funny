@@ -18,7 +18,6 @@ const UserDataProvider: React.FunctionComponent<IUserDataProviderProps> = (props
   const { children } = props;
   const auth = useAuth();
   const [userData, setUserData] = React.useState<IUserData | null>(null);
-  console.log('user data: ', userData);
   React.useEffect(() => {
     if (!auth) {
       return;

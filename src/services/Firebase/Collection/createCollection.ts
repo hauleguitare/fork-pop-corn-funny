@@ -4,23 +4,27 @@ import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from ".."
 
 
-export const createCollection = async (user: User) => {
-    console.log('userid: ', user.uid);
+export const createUserDocument = async (user: User) => {
     const refDoc = doc(db, 'users', user.uid);
-    const docSnap = await getDoc(refDoc);
-    if (docSnap.exists()){
+    const snapshot = await getDoc(refDoc);
+    if (snapshot.exists()){
         return;
     }
-    const dataUser: IUserData = {
+    const dataUser = {
         uid: user.uid,
-        displayName: user.displayName ?? '',
-        email: user.email as string,
-        photoURL: user.photoURL ?? '',
+        images: {
+            photoURL: user.photoURL ?? '',
+            bannerURL: ''
+        },
+        information: {
+            email: user.email as string,
+            description: "Say something about me",
+            displayName: user.displayName ?? ""
+        },
         watchlist: [],
-        recently: [],
-        bannerURL: '',
-        description: "Something about me"
-      }
+        recently: []
+    }
+
     setDoc(refDoc, {
         ...dataUser,
     }).catch(error => {

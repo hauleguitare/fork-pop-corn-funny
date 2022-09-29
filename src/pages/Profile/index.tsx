@@ -1,13 +1,12 @@
+import { useAuth } from '@src/services/context/Auth';
+import { RootState } from '@src/services/Store';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ButtonField from './components/ButtonField';
 import FormUpdate, { IDataSubmit } from './components/FormUpdate';
 import ProfileImage from './components/Image';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { updateFieldUserDocumentWithObject } from '@src/services/Firebase/Collection/updateDocument';
-import { useAuth } from '@src/services/context/Auth';
-import { useUserData } from '@src/services/context/UserData';
-import { updateProfile } from '@src/services/Firebase/Update/updateProfile';
 
 interface IProfilePageProps {}
 
@@ -18,21 +17,22 @@ const initialValues = {
 };
 
 const ProfilePage: React.FunctionComponent<IProfilePageProps> = (props) => {
-  const userData = useUserData();
+  const userInfomation = useSelector((root: RootState) => root.userData.infomation);
+  const userId = useSelector((root: RootState) => root.userData.uid);
   const auth = useAuth();
   const [access, setAccess] = React.useState(true);
   const [providerAccess, setProviderAccess] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState<typeof initialValues | null>(null);
   React.useEffect(() => {
-    if (userData) {
+    if (userInfomation) {
       const value = {
-        email: userData.email,
-        description: userData.description,
-        displayName: userData.displayName,
+        email: userInfomation.email,
+        description: userInfomation.description,
+        displayName: userInfomation.displayName,
       };
       setCurrentUser(value);
     }
-  }, [userData]);
+  }, [userInfomation]);
 
   // Function Toasty message
 
@@ -67,7 +67,7 @@ const ProfilePage: React.FunctionComponent<IProfilePageProps> = (props) => {
     <div className="text-white">
       <ToastContainer autoClose={2000} />
       {/* <p>My account</p> */}
-      <ProfileImage />
+      <ProfileImage uid={userId ?? ''} />
       <div className="mt-16 ml-2 text-white text-lg font-roboto">
         <span>Hau Le Trung</span>
       </div>

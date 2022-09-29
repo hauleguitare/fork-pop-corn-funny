@@ -5,13 +5,17 @@ import SearchBar from '@src/components/SearchBar';
 import { MENU_LIST } from '@src/constants';
 import { useScrollEvent } from '@src/hooks';
 import { useUserData } from '@src/services/context/UserData';
+import { RootState } from '@src/services/Store';
 import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 interface IDesktopHeaderProps {}
 
 const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
   const CurrentUser = useUserData();
+  const displayName = useSelector((root: RootState) => root.userData.infomation?.displayName);
+  const photoURL = useSelector((root: RootState) => root.userData.images?.photoURL);
   const [scrollPos] = useScrollEvent();
 
   return (
@@ -46,7 +50,7 @@ const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
           </div>
           <div className="flex ml-4 gap-4 relative">
             {CurrentUser ? (
-              <ProfileNavBar displayName={CurrentUser.displayName} photoURL={CurrentUser.photoURL} />
+              <ProfileNavBar displayName={displayName} photoURL={photoURL} />
             ) : (
               <Fragment>
                 <Link to={'/login'} className="bg-dark-smooth-primary/80 px-2 py-1 rounded-lg">

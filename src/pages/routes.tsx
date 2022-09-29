@@ -3,11 +3,11 @@ import { AnimatePresence } from 'framer-motion';
 import { Route, Routes } from 'react-router';
 import DiscoverPage from './Discover';
 import HomePage from './Home';
-import LoginPage from './Login';
 import NotFoundPage from './NotFound';
 import ProfilePage from './Profile';
-import RegisterPage from './Register';
 import SearchPage from './Search';
+import SignInPage from './SignIn';
+import SignUpPage from './SignUp';
 import TestPage from './Test';
 
 interface IClientRoutesProps {
@@ -36,7 +36,7 @@ const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
           path="/login"
           element={
             <AuthProtected hasLogin={!isLoggedIn} redirectTo={'/'}>
-              <LoginPage />
+              <SignInPage />
             </AuthProtected>
           }
         />
@@ -44,7 +44,7 @@ const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
           path="/signup"
           element={
             <AuthProtected hasLogin={!isLoggedIn} redirectTo={'/'}>
-              <RegisterPage />
+              <SignUpPage />
             </AuthProtected>
           }
         />

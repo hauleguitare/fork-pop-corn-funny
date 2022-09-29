@@ -3,22 +3,6 @@ import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } 
 import { auth } from "../..";
 
 
-
-
-export const SignUpUserWithEmailAndPassWord = async (displayName: string ,email: string, password: string) =>{
-    // Handle create user
-     new Promise((resolve, reject) =>{
-        createUserWithEmailAndPassword(auth, email, password).then((val) =>{
-            sendEmailVerification(val.user).catch((error: FirebaseError) =>{
-                reject(error);
-            });
-            updateProfile(val.user, {
-                displayName: displayName
-            }).catch((error: FirebaseError) =>{
-                reject(error);
-            })
-        }).catch((error: FirebaseError) =>{
-            reject(error);
-        })
-    });
+export const SignUpUserWithEmailAndPassWord = (displayName: string, email: string, password: string) =>{
+    return createUserWithEmailAndPassword(auth, email, password);
 }

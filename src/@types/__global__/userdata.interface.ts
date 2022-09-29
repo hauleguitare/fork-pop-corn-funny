@@ -1,11 +1,15 @@
 export interface IUserData {
     uid: string,
-    displayName: string,
-    email: string,
-    photoURL: string,
-    bannerURL: string,
+    images: {
+        photoURL: string,
+        bannerURL: string,
+    },
+    information: {
+        
+        displayName: string,
+        email: string,
+        description: string
+    },
     recently: any[],
-    watchlist: any[],
-    description: string
-
+    watchlist: any[]
 }
