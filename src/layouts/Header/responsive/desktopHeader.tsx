@@ -5,8 +5,7 @@ import SearchBar from '@src/components/SearchBar';
 import { MENU_LIST } from '@src/constants';
 import { useScrollEvent } from '@src/hooks';
 import { useAuth } from '@src/services/context/Auth';
-import { useUserData } from '@src/services/context/UserData';
-import { RootState, useAppSelector } from '@src/services/Store';
+import { useAppSelector } from '@src/services/Store';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 

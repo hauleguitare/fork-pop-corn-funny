@@ -19,6 +19,8 @@
     "bcryptjs": "^2.4.3",
     "firebase": "^9.10.0",
     "firebase-tools": "^11.10.0",
+    "flowbite": "^1.5.3",
+    "flowbite-react": "^0.1.11",
     "formik": "^2.2.9",
     "framer-motion": "^7.3.6",
     "query-string": "^7.1.1",
@@ -36,6 +38,7 @@
     "react-toastify": "^9.0.8",
     "styled-components": "^5.3.5",
     "swiper": "^8.4.2",
+    "tw-elements": "^1.0.0-alpha12",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.11"
