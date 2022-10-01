@@ -1,31 +1,29 @@
 import FormGroup from '@src/components/FormGroup';
-import { useAppDispatch } from '@src/services/Store';
-import { requireAuthenticateUser } from '@src/services/Store/slices/reAuthenticate';
+import TextArea from '@src/components/TextArea';
 import { FieldProps } from 'formik';
 import * as React from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { CgUndo } from 'react-icons/cg';
 
-interface IPublicFieldProps {
-  type: React.HTMLInputTypeAttribute;
+interface IPublicTextAreaProps {
   label: string;
   access?: boolean;
   className?: string;
-  promtAuthenticateFor?: boolean;
 }
 
-const PublicField: React.FunctionComponent<IPublicFieldProps & FieldProps> = (props) => {
-  const { type, label, access, className, promtAuthenticateFor, field, form } = props;
+const PublicTextArea: React.FunctionComponent<IPublicTextAreaProps & FieldProps> = (props) => {
+  const { label, access, className, field, form } = props;
   const { name, value, onChange, onBlur } = field;
-  const dispatch = useAppDispatch();
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
   const [updateField, setUpdateField] = React.useState(false);
-  const ref = React.useRef<HTMLInputElement>(null);
+  const ref = React.useRef<HTMLTextAreaElement>(null);
 
   React.useEffect(() => {
     if (ref.current) {
       ref.current.disabled = !updateField;
       ref.current.focus();
+      ref.current.select();
     }
   }, [updateField]);
 
@@ -37,48 +35,40 @@ const PublicField: React.FunctionComponent<IPublicFieldProps & FieldProps> = (pr
   };
 
   const handleOnClickEdit = () => {
-    if (promtAuthenticateFor) {
-      dispatch(requireAuthenticateUser());
-    } else {
-      setUpdateField(true);
-    }
+    setUpdateField(true);
   };
 
   return (
     <FormGroup onBlur={handleOnBlurInput} className={className}>
       <label className="pb-2">{label}</label>
       <div className="relative">
-        <input
+        <textarea
+          rows={6}
+          maxLength={255}
           ref={ref}
-          type={type}
           name={name}
-          value={value}
-          onChange={onChange}
           onBlur={onBlur}
+          onChange={onChange}
+          value={value}
           className={`bg-dark-smooth-on-surface outline-none py-2 px-2 text-dark-smooth-text-default rounded-lg w-full`}
         />
         {access && (
           <React.Fragment>
             {!updateField && (
-              <button
-                type="button"
-                onClick={handleOnClickEdit}
-                className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10"
-              >
+              <button onClick={handleOnClickEdit} className="absolute top-0 right-0 my-2 mr-2 w-6 h-6 z-10">
                 <AiOutlineEdit className="w-full h-full" />
               </button>
             )}
           </React.Fragment>
         )}
+        {showError ? <label className="text-sm text-red-400 italic">{errors[name]?.toString()}</label> : undefined}
       </div>
-      {showError ? <label className="text-sm text-red-400 italic">{errors[name]?.toString()}</label> : undefined}
     </FormGroup>
   );
 };
 
-PublicField.defaultProps = {
+PublicTextArea.defaultProps = {
   access: false,
-  promtAuthenticateFor: false,
 };
 
-export default PublicField;
+export default PublicTextArea;

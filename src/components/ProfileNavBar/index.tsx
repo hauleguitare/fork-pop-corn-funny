@@ -33,7 +33,7 @@ const ProfileNavBar: React.FunctionComponent<IProfileNavBarProps> = (props) => {
       className="flex items-center gap-4 relative cursor-pointer"
     >
       <img
-        src={photoURL ?? GuestProfile}
+        src={photoURL ? photoURL : GuestProfile}
         className="h-10 w-10 rounded-full object-cover"
         referrerPolicy="no-referrer"
       />

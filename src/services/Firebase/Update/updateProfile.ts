@@ -1,56 +1,29 @@
 import { IupdateProfile } from "@src/@types/__global__";
 import { FirebaseError } from "firebase/app";
-import { updateEmail, updatePassword, User } from "firebase/auth"
-import { updateFieldUserDocumentWithObject } from "../Collection/updateDocument";
+import { EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword, User } from "firebase/auth"
+import { updateUserFieldInfomation } from "../Collection/updateDocument";
 
-export const updateProfile = async (currentUser: User | null, dataUpdate: IupdateProfile) =>{
-    if (!currentUser){
-        return;
+export const updateProfile = async (currentUser: User | null, data: IupdateProfile) =>{
+    try {
+        if (!currentUser){
+            throw new Error("account is not access to update profile");
+        }
+        if (data.email !== currentUser.email){
+            console.log('update email');
+            await updateEmail(currentUser, data.email);
+        }
+        if (data.password){
+            console.log('update password')
+            await updatePassword(currentUser, data.password);
+        }
+        console.log('update field')
+        await updateUserFieldInfomation(currentUser.uid, {
+            email: data.email,
+            description: data.description ?? '',
+            displayName: data.displayName
+        })
+    } catch (error) {
+        throw error;
     }
-    return new Promise((resolve, reject) =>{
-        if (dataUpdate.email !== currentUser.email){
-            updateEmail(currentUser, dataUpdate.email).catch((error) => reject(error));
-        }
-        if (dataUpdate.password){
-            updatePassword(currentUser, dataUpdate.password).catch((error) => reject(error));
-        }
-        updateFieldUserDocumentWithObject(currentUser.uid, 'users', {
-            displayName: dataUpdate.displayName,
-            description: dataUpdate.description,
-            email: dataUpdate.email
-        }).catch((error) => reject(error));
-        resolve('success');
-    })
     
 }
-
-/**
- 
-if (currentUser.providerId === 'google' || currentUser.providerId === 'facebook'){
-            reject()
-        }
-
-        updatePassword(currentUser, dataUpdate.password).catch((error) => reject(`can't updatePassword: ${error}`));
- */
-
-
-
-
-        // try {
-    //     if (dataUpdate.email !== currentUser.email){
-    //         console.log('update email')
-    //         await updateEmail(currentUser, dataUpdate.email);
-    //     }
-    //     if (dataUpdate.password){
-    //         console.log('update password')
-    //         await updatePassword(currentUser, dataUpdate.password);
-    //     }
-    //     console.log('update document')
-    //     await updateFieldUserDocumentWithObject(currentUser.uid, 'users', {
-    //         displayName: dataUpdate.displayName,
-    //         description: dataUpdate.description,
-    //        email: dataUpdate.email
-    //     })
-    // } catch (error: any) {
-    //     console.log('error: ', error.code);
-    // }

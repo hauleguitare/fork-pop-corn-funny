@@ -1,6 +1,7 @@
 import { IUserData } from '@src/@types/__global__';
 import { auth, db } from '@src/services/Firebase';
-import { updateImages, updateInfomation, updateUserData, updateUserId } from '@src/services/Store/slices/userDataSlice';
+import { updateAuthenticateUser } from '@src/services/Store/slices/reAuthenticate';
+import { updateUserData } from '@src/services/Store/slices/userDataSlice';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -25,7 +26,8 @@ const AuthProvider: React.FunctionComponent<IAuthProviderProps> = (props) => {
       setCurrentUser(result);
       if (!result) {
         localStorage.clear();
-        dispatch(updateUserData(result));
+        dispatch(updateUserData(null)); // Action update Data from database
+        dispatch(updateAuthenticateUser(null)); // Action update Re-Authenticate when user using setting profile or future features required Re-Authentication
         return;
       }
       const access_token = await result.getIdToken();
@@ -33,11 +35,7 @@ const AuthProvider: React.FunctionComponent<IAuthProviderProps> = (props) => {
       const docRef = doc(db, 'users', result.uid);
       onSnapshot(docRef, (snapshot) => {
         const data = snapshot.data() as IUserData;
-        console.log('data information: ', data.information);
         dispatch(updateUserData(data));
-        dispatch(updateImages(data.images));
-        dispatch(updateInfomation(data.information));
-        dispatch(updateUserId(result.uid));
       });
     });
     return () => {

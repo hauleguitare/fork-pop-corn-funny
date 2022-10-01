@@ -1,42 +1,34 @@
-import { uploadImage } from '@src/api/uploadImage';
-import { updateFieldDocument } from '@src/services/Firebase/Collection/updateDocument';
-import { RootState } from '@src/services/Store';
+import { useAppSelector } from '@src/services/Store';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
 import ProfileAvatar from './Avatar';
 import ProfileBanner from './Banner';
 
-interface IProfileImageProps {
-  uid?: string;
-}
+interface IProfileImageProps {}
 
 const ProfileImage: React.FunctionComponent<IProfileImageProps> = (props) => {
-  const { uid } = props;
-  const images = useSelector((root: RootState) => root.userData.images);
-
-  // handle Event
-
-  const handleOnChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tempListData = e.currentTarget.files;
-    if (!tempListData) {
-      return;
-    }
-    const formData = new FormData();
-    formData.append('image', tempListData[0]);
-    try {
-      const res = await uploadImage(formData);
-      updateFieldDocument(uid ?? '', 'users', 'images', res.data.link).catch((error) => {
-        console.log("can't not update image: ", error);
+  const uid = useAppSelector((root) => root.userData.user?.uid);
+  //handle Event
+  const handleOnError = (error: any) => {
+    if (error) {
+      toast.error(`${error}`, {
+        autoClose: 2000,
+        type: 'error',
+        closeButton: true,
       });
-    } catch (error) {
-      console.log(error);
+    } else {
+      toast.success('success update images', {
+        autoClose: 2000,
+        type: 'success',
+        closeButton: true,
+      });
     }
   };
 
   return (
     <div className="relative">
-      <ProfileBanner access uid={uid} url={images?.bannerURL} onChangeImage={handleOnChangeImage} />
-      <ProfileAvatar access url={images?.photoURL} uid={uid} onChangeImage={handleOnChangeImage} />
+      <ProfileBanner access uid={uid} onError={handleOnError} />
+      <ProfileAvatar access uid={uid} onError={handleOnError} />
     </div>
   );
 };
