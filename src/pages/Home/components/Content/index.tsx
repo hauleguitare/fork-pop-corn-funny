@@ -3,6 +3,7 @@ import { IAbstractMovie } from '@src/@types/__movies__';
 import { fetchMovies } from '@src/api';
 import ContentSlider from '@src/components/Slider/ContentSection';
 import { useQuery } from '@tanstack/react-query';
+import { AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react';
 import ContentLoading from './Loading';
 
@@ -13,13 +14,11 @@ interface IContentSectionProps {
 
 const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) => {
   const { sectionType, title } = props;
-  const [type, setType] = useState(sectionType.type[0]);
-  const [category, setCategory] = useState(sectionType);
-  const endpoint = `${category.id}`;
+  const endpoint = `${sectionType.id}`;
   const { data, isLoading, error } = useQuery<ListResponse<IAbstractMovie>, Error>(
-    [`section-query${type.id}`, `${category.id}`],
+    [`section-query${sectionType.type[0].id}`, `${sectionType.id}`],
     () => {
-      return fetchMovies<IAbstractMovie>(type.id, endpoint);
+      return fetchMovies<IAbstractMovie>(sectionType.type[0].id, endpoint);
     }
   );
 
@@ -34,7 +33,9 @@ const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) =>
       <h3 className="up-mobile:pl-0 pl-4 pt-2 inline-block text-xl text-dark-smooth-text-default/80 font-oswald pb-4 capitalize">
         {title}
       </h3>
-      {data ? <ContentSlider data={data.results} type={type} /> : <ContentLoading isLoading={true} />}
+      <AnimatePresence>
+        {data ? <ContentSlider data={data.results} type={sectionType.type[0]} /> : <ContentLoading isLoading={true} />}
+      </AnimatePresence>
     </section>
   );
 };
