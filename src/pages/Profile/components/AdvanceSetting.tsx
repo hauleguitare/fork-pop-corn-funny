@@ -1,13 +1,12 @@
 import ModalTemplete from '@src/components/ModalTemplete';
+import { DeleteAccount } from '@src/services/Firebase/Auth/DeleteAccount';
 import { useAppDispatch, useAppSelector } from '@src/services/Store';
 import { requireAuthenticateUser } from '@src/services/Store/slices/reAuthenticate';
-import { deleteUser, sendEmailVerification, User } from 'firebase/auth';
-import { AnimatePresence } from 'framer-motion';
+import { sendEmailVerification, User } from 'firebase/auth';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 import { toast } from 'react-toastify';
 import ButtonField from './Form/ButtonField';
-import { motion } from 'framer-motion';
-import { DeleteAccount } from '@src/services/Firebase/Auth/DeleteAccount';
 
 interface IAdvanceSettingProps {
   auth: User | null;

@@ -2,7 +2,7 @@ import { IUserData } from '@src/@types/__global__';
 import { auth, db } from '@src/services/Firebase';
 import { updateAuthenticateUser } from '@src/services/Store/slices/reAuthenticate';
 import { updateUserData } from '@src/services/Store/slices/userDataSlice';
-import { onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';

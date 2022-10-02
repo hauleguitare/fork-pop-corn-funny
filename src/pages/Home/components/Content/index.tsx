@@ -4,7 +4,7 @@ import { fetchMovies } from '@src/api';
 import ContentSlider from '@src/components/Slider/ContentSection';
 import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence } from 'framer-motion';
-import React, { useState } from 'react';
+import React from 'react';
 import ContentLoading from './Loading';
 
 interface IContentSectionProps {

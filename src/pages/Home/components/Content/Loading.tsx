@@ -1,6 +1,6 @@
 import Skeleton from '@src/components/Skeleton';
+import { motion, MotionConfig } from 'framer-motion';
 import * as React from 'react';
-import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 
 interface IContentLoadingProps {
   isLoading: boolean;
@@ -12,32 +12,30 @@ const ContentLoading: React.FunctionComponent<IContentLoadingProps> = (props) =>
   const arr = Array.from(Array(total).keys());
 
   return (
-    <AnimatePresence>
+    <MotionConfig transition={{ duration: 0.31, delay: 0.1, type: 'spring' }}>
       {isLoading && (
-        <MotionConfig transition={{ duration: 1, delay: 2 }}>
-          <Skeleton className="flex flex-start cursor-progress overflow-hidden relative flex-nowrap bg-dark-smooth-surface/30 container shadow-md rounded-lg">
-            {arr.map((item) => (
-              <motion.div
-                key={item}
-                className="min-w-[176px] min-h-[263px] mr-[30px] bg-dark-smooth-on-surface rounded-lg  shadow-md mb-14"
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: (item + 1) * 0.36,
-                }}
-                exit={{
-                  opacity: 0,
-                }}
-              />
-            ))}
-          </Skeleton>
-        </MotionConfig>
+        <Skeleton className="flex flex-start cursor-progress overflow-hidden relative flex-nowrap bg-dark-smooth-surface/30 container shadow-md rounded-lg">
+          {arr.map((item) => (
+            <motion.div
+              key={item}
+              className="min-w-[176px] min-h-[263px] mr-[30px] bg-dark-smooth-on-surface rounded-lg  shadow-md mb-14"
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                duration: (item + 1) * 0.11,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+            />
+          ))}
+        </Skeleton>
       )}
-    </AnimatePresence>
+    </MotionConfig>
   );
 };
 

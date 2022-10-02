@@ -1,6 +1,7 @@
 import AuthProtected from '@src/components/AuthProtected';
 import { AnimatePresence } from 'framer-motion';
-import { Route, Routes } from 'react-router';
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router';
 import DiscoverPage from './Discover';
 import HomePage from './Home';
 import NotFoundPage from './NotFound';
@@ -15,6 +16,12 @@ interface IClientRoutesProps {
 }
 const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
   const { isLoggedIn } = props;
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.search, location.pathname]);
+
   return (
     <AnimatePresence>
       <Routes>

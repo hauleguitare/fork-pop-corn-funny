@@ -59,17 +59,6 @@ const BannerSlider: React.FunctionComponent<IBannerSliderProps> = (props) => {
                 <span className="text-gray-300/50 text-base">
                   {item.release_date?.toString() ?? item.first_air_date?.toString()}
                 </span>
-                {/* <span className="text-white text-base flex">
-                            <GenreContext.Consumer>
-                                {(valContext) => (
-                                    <ListGenres
-                                        listGenres={valContext[type.id]}
-                                        genres_ids={item.genre_ids}
-                                        className="bg-stone-light-chocolate mx-2 my-2 text-sm up-tablet:text-xl"
-                                    />
-                                )}
-                            </GenreContext.Consumer>
-                        </span> */}
                 <p className="text-gray-100/60 text-sm hidden up-mobile:block">{item.overview}</p>
               </div>
             </div>

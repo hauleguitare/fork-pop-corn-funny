@@ -18,6 +18,10 @@
   @apply bg-dark-smooth-on-surface rounded-full hover:bg-white/40 transition duration-300;
 }
 
+.tw-background-on-blur{
+  @apply bg-dark-smooth-theme/50
+}
+
 button{
   -webkit-tap-highlight-color: transparent;
 }

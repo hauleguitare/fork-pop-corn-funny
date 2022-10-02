@@ -1,17 +1,14 @@
-import { IBannerSection, ICategory, ListResponse } from '@src/@types/__global__';
+import { ICategory, ListResponse } from '@src/@types/__global__';
 import { ITrending } from '@src/@types/__movies__';
 import { fetchMovies } from '@src/api';
 import BannerSlider from '@src/components/Slider/BannerSection';
 import { useQuery } from '@tanstack/react-query';
-import React, { createContext, useState } from 'react';
+import React, { useState } from 'react';
 import BannerLoading from './Loading';
 
-interface IBannerSectionProps {
-  className?: string;
-}
+interface IBannerSectionProps {}
 
 const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
-  const { className } = props;
   const [type, setType] = useState('trending');
   const [category, setCategory] = useState<ICategory>({ id: 'all', name: 'all' });
   const [timeWindows, SetWindowTime] = useState('day');
@@ -34,7 +31,4 @@ const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
   );
 };
 
-BannerSection.defaultProps = {
-  className: '',
-};
 export default BannerSection;

@@ -1,12 +1,9 @@
+import FallBackCard from '@src/asserts/images/fallback_card300x450.png';
 import * as React from 'react';
+import { BiPlayCircle } from 'react-icons/bi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import FallBackCard from '@src/asserts/images/fallback_card300x450.png';
-import { BiPlayCircle } from 'react-icons/bi';
 import Skeleton from '../Skeleton';
-import useCurrentViewPort from '@src/hooks/useCurrentViewPort';
-import { ICategory } from '@src/@types/__global__';
-import { IAbstractMovie } from '@src/@types/__movies__';
 
 interface ICardProps {
   className?: string;

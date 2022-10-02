@@ -8,6 +8,7 @@ import { useAuth } from '@src/services/context/Auth';
 import { useAppSelector } from '@src/services/Store';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 interface IDesktopHeaderProps {}
 
@@ -23,6 +24,7 @@ const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
         scrollPos >= 100 ? 'bg-dark-smooth-on-surface' : 'bg-transparent'
       }`}
     >
+      <ToastContainer />
       <nav className="container opacity-80 flex justify-between items-center h-full">
         <LogoText title="POPCORN" className="text-3xl" />
         <div className="flex shrink items-center">

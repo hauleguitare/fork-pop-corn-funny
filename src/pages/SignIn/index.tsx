@@ -3,6 +3,7 @@ import MotionChangePage from '@src/components/MotionChangePage';
 import FormLogin, { IDataSubmit } from '@src/pages/SignIn/components/Form/Login';
 import { SignInUserWithEmailAndPassWord } from '@src/services/Firebase/Auth/SignIn/SignInUserWithEmailAndPassWord';
 import { SignInWithProvider } from '@src/services/Firebase/Auth/SignIn/SignInWithProvider';
+import { ConvertCodeErrorFirebase } from '@src/utils/ConvertCodeErrorFirebase';
 import * as React from 'react';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -16,7 +17,7 @@ const SignInPage: React.FunctionComponent<ISignInPageProps> = (props) => {
     const Toastid = toast.loading('wait for second');
     try {
       // I don't have idea to use credential but future may be using. Note !!!
-      const credential = await SignInUserWithEmailAndPassWord(dataSubmit.email, dataSubmit.password);
+      await SignInUserWithEmailAndPassWord(dataSubmit.email, dataSubmit.password);
       toast.update(Toastid, {
         render() {
           return 'Login success';
@@ -26,10 +27,10 @@ const SignInPage: React.FunctionComponent<ISignInPageProps> = (props) => {
         autoClose: 2000,
         isLoading: false,
       });
-    } catch (error) {
+    } catch (error: any) {
       toast.update(Toastid, {
         render() {
-          return `Login fail: ${error}`;
+          return `Login fail: ${error.code}`;
         },
         closeButton: true,
         type: 'error',
