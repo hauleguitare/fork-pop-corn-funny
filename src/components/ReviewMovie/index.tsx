@@ -10,7 +10,7 @@ import { BsArrowLeftCircleFill, BsBookmarksFill, BsShareFill } from 'react-icons
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ListGenres from '../ListGenres';
 import ModalTemplete from '../ModalTemplete';
 import RatingStar from '../RatingStar';
@@ -33,6 +33,7 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
     if (!reviewState) {
       return;
     }
+    dispatch(removeReview());
     const url = ConvertBeautifulURL(reviewState.movie.id, reviewState.movie.title ?? reviewState.movie.name) ?? '404';
     const type = reviewState.media_type;
     navigate(`${type}/${url}`, {

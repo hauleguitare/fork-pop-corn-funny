@@ -1,5 +1,5 @@
 import { IDetailAbstractMovie } from '@src/@types/__movies__';
-import { IExternal, Images } from '@src/@types/__movies__/append_to_response';
+import { IExternal, Images, ISimilar, IVideos } from '@src/@types/__movies__/append_to_response';
 import { fetchMovie } from '@src/api';
 import { useQuery } from '@tanstack/react-query';
 import * as React from 'react';
@@ -12,7 +12,10 @@ interface IQueryMoviesProps {
   type: string;
   movieId: number;
 }
-type AppendToResponse = Pick<IExternal, 'external_ids'> & Pick<Images, 'images'>;
+export type AppendToResponse = Pick<IExternal, 'external_ids'> &
+  Pick<Images, 'images'> &
+  Pick<IVideos, 'videos'> &
+  Pick<ISimilar, 'similar'>;
 
 const QueryMovies: React.FunctionComponent<IQueryMoviesProps> = (props) => {
   const { type, movieId } = props;
@@ -23,7 +26,12 @@ const QueryMovies: React.FunctionComponent<IQueryMoviesProps> = (props) => {
   const { data, isLoading, isError, error, isFetching } = useQuery<IDetailAbstractMovie & AppendToResponse, Error>(
     [`detail-movies-${type}-${movieId}`],
     () => {
-      return fetchMovie<IDetailAbstractMovie & AppendToResponse>(type, movieId, ['external_ids']);
+      return fetchMovie<IDetailAbstractMovie & AppendToResponse>(type, movieId, [
+        'external_ids',
+        'videos',
+        'images',
+        'similar',
+      ]);
     }
   );
 
@@ -41,11 +49,11 @@ const QueryMovies: React.FunctionComponent<IQueryMoviesProps> = (props) => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div>
       {data && (
         <React.Fragment>
           <BannerSection data={data} />
-          <ContentSection data={data} socialMedia={data} type={type} />
+          <ContentSection data={data} type={type} />
         </React.Fragment>
       )}
     </div>

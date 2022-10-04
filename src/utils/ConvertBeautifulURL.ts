@@ -1,6 +1,6 @@
 export const ConvertBeautifulURL =(id?: number, title?: string) =>{
     if (!id || !title){
-        return null
+        return;
     }
     const stringReplace = title.replace(/[^\w\s]/gi, '');
     const newArr = stringReplace?.toLocaleLowerCase().split(' ');
