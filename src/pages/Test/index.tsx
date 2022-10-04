@@ -4,50 +4,48 @@ interface ITestPageProps {}
 
 const TestPage: React.FunctionComponent<ITestPageProps> = (props) => {
   return (
-    <div className="h-screen">
-      <div className="w-60 h-full shadow-md bg-white px-1 absolute" id="sidenavExample">
-        <ul className="relative">
-          <li className="relative" id="sidenavEx1">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseSidenavEx1"
-              aria-expanded="true"
-              aria-controls="collapseSidenavEx1"
-            >
-              <span>Click here 1</span>
-            </a>
-            <ul
-              className="relative accordion-collapse collapse"
-              id="collapseSidenavEx1"
-              aria-labelledby="sidenavEx1"
-              data-bs-parent="#sidenavExample"
-            >
-              <li className="relative">
-                <a
-                  href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="dark"
-                >
-                  Link 1
-                </a>
-              </li>
-              <li className="relative">
-                <a
-                  href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="dark"
-                >
-                  Link 2
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+    <div className="accordion" id="accordionExample">
+      <div className="accordion-item bg-white border border-gray-200">
+        <h2 className="accordion-header mb-0" id="headingOne">
+          <button
+            className="
+          accordion-button
+          relative
+          flex
+          items-center
+          w-full
+          py-4
+          px-5
+          text-base text-gray-800 text-left
+          bg-white
+          border-0
+          rounded-none
+          transition
+          focus:outline-none
+        "
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Accordion Item #1
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          className="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body py-4 px-5">
+            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin
+            adds the appropriate classNamees that we use to style each element. These classNamees control the overall
+            appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom
+            CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the{' '}
+            <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
       </div>
     </div>
   );

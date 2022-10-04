@@ -21,7 +21,7 @@ const Card: React.FunctionComponent<ICardProps> = (props) => {
 
   return (
     <div className={className}>
-      <a href="#" onClick={(e) => e.preventDefault()} className="relative">
+      <a onClick={(e) => e.preventDefault()} className="relative cursor-pointer">
         <div className="group hover:scale-105 rounded-md overflow-hidden transition ease-in duration-150 relative object-cover">
           <LazyLoadImage
             src={img ? `https://image.tmdb.org/t/p/${widthImageEndpoint}/${img}` : FallBackCard}

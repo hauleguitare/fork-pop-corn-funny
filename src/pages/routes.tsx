@@ -2,6 +2,7 @@ import AuthProtected from '@src/components/AuthProtected';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
+import DetailMovie from './Details-Movies';
 import DiscoverPage from './Discover';
 import HomePage from './Home';
 import NotFoundPage from './NotFound';
@@ -31,13 +32,11 @@ const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
         <Route path="/search" element={<SearchPage />} />
 
         {/* This is routes for DiscoverPage */}
-        <Route path="/movie" element={<DiscoverPage type="movie" />}>
-          <Route path="movie/:movie_id" element={<div>DETAIL MOVIE</div>} />
-        </Route>
+        <Route path="/movie" element={<DiscoverPage type="movie" />} />
+        <Route path="movie/:tilte_movie" element={<DetailMovie type="movie" />} />
 
-        <Route path="/tv" element={<DiscoverPage type="tv" />}>
-          <Route path="tv/:movie_id" element={<div>DETAIL TV</div>} />
-        </Route>
+        <Route path="/tv" element={<DiscoverPage type="tv" />} />
+        <Route path="tv/:tilte_movie" element={<DetailMovie type="tv" />} />
 
         <Route
           path="/login"

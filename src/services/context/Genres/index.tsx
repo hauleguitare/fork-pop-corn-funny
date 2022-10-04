@@ -1,6 +1,6 @@
 import { IGenre } from '@src/@types/__movies__';
 import { fetchGenres } from '@src/api';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 interface IGenresProviderProps {
   children?: React.ReactNode;
@@ -10,6 +10,11 @@ export interface IGenresContext {
   [key: string]: IGenre[];
 }
 export const GenreContext = React.createContext<IGenresContext>({});
+
+export const useGenres = () => {
+  return useContext(GenreContext);
+};
+
 const GenresProvider: React.FunctionComponent<IGenresProviderProps> = (props) => {
   const { children } = props;
   const [genres, setGenres] = useState<IGenresContext>({});

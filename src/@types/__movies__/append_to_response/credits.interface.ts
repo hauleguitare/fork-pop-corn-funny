@@ -1,4 +1,4 @@
-export interface Credits {
+export interface ICredits {
     cast: Cast[];
     crew: Cast[];
 }

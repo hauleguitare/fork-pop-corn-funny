@@ -8,7 +8,6 @@ interface IRatingStarProps {
 const setStar = (vote_average: number): JSX.Element[] => {
   const arrStar: JSX.Element[] = [];
   const calc = vote_average / 2;
-  console.log(calc);
 
   if (calc % 1 === 0) {
     for (let i = 0; i < calc; i++) {

@@ -3,12 +3,14 @@ import useCurrentViewPort from '@src/hooks/useCurrentViewPort';
 import { GenreContext } from '@src/services/context/Genres';
 import { RootState } from '@src/services/Store';
 import { removeReview } from '@src/services/Store/slices/reviewMovieSlice';
+import { ConvertBeautifulURL } from '@src/utils/ConvertBeautifulURL';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { Fragment } from 'react';
-import { GrFormPrevious } from 'react-icons/gr';
+import { BsArrowLeftCircleFill, BsBookmarksFill, BsShareFill } from 'react-icons/bs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 import ListGenres from '../ListGenres';
 import ModalTemplete from '../ModalTemplete';
 import RatingStar from '../RatingStar';
@@ -18,13 +20,26 @@ interface IReviewMovieProps {}
 const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
   const { width, isMobile } = useCurrentViewPort();
   const dispatch = useDispatch();
+  const reviewState = useSelector((state: RootState) => state.reviewMovie.value);
+  const navigate = useNavigate();
 
   const handleOnBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
       dispatch(removeReview());
     }
   };
-  const reviewState = useSelector((state: RootState) => state.reviewMovie.value);
+
+  const handleOnViewDetail = () => {
+    if (!reviewState) {
+      return;
+    }
+    const url = ConvertBeautifulURL(reviewState.movie.id, reviewState.movie.title ?? reviewState.movie.name) ?? '404';
+    const type = reviewState.media_type;
+    navigate(`${type}/${url}`, {
+      replace: true,
+    });
+  };
+
   return (
     <AnimatePresence>
       {reviewState && (
@@ -50,10 +65,21 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
                 onClick={() => {
                   dispatch(removeReview());
                 }}
-                className="text-white fixed z-10 top-0 left-0 w-10 h-10 mx-4 my-4 rounded-full bg-dark-smooth-button-default/60"
+                className="fixed z-10 top-0 left-0 w-8 h-8 overflow-hidden mx-4 my-4 group"
               >
-                <GrFormPrevious className="w-full h-full" />
+                <BsArrowLeftCircleFill className="fill-white/80 opacity-60 w-full h-full group-hover:opacity-100 duration-150 ease-linear transition-opacity" />
               </button>
+
+              <div className="fixed z-10 top-0 right-0 mx-4 my-4 flex gap-4">
+                <button className=" w-8 h-8 overflow-hidden">
+                  <BsShareFill className="fill-white opacity-60 w-full h-full group-hover:opacity-100 duration-150 ease-linear transition-opacity" />
+                </button>
+
+                <button className="w-8 h-8 overflow-hidden group">
+                  <BsBookmarksFill className="fill-white opacity-60 w-full h-full group-hover:opacity-100 duration-150 ease-linear transition-opacity" />
+                </button>
+              </div>
+
               <div className="object-cover relative">
                 <LazyLoadImage
                   src={
@@ -63,7 +89,11 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
                   }
                   effect={'opacity'}
                 />
-                <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent "></div>
+                <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent ">
+                  <button className="absolute bottom-4 right-4 text-white py-2 px-2 bg-blue-primary rounded-lg opacity-60 hover:opacity-100 z-20 duration-150 transition-opacity ease-linear">
+                    More Details
+                  </button>
+                </div>
               </div>
               <div className="text-white flex flex-col mx-4 mb-8 mt-4">
                 <div className="py-4">
@@ -115,10 +145,21 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
                   onClick={() => {
                     dispatch(removeReview());
                   }}
-                  className="text-white fixed z-10 top-0 left-0 w-10 h-10 mx-4 my-4 rounded-full bg-dark-smooth-button-default/60"
+                  className="fixed z-10 top-0 left-0 w-8 h-8 overflow-hidden mx-4 my-4 group"
                 >
-                  <GrFormPrevious className="w-full h-full" />
+                  <BsArrowLeftCircleFill className="fill-white/80 opacity-60 w-full h-full group-hover:opacity-100 duration-150 ease-linear transition-opacity" />
                 </button>
+
+                <div className="fixed z-10 top-0 right-0 mx-4 my-4 flex gap-4">
+                  <button className="w-8 h-8 overflow-hidden group">
+                    <BsShareFill className="fill-white opacity-60 w-full h-full group-hover:opacity-100 duration-150 ease-linear transition-opacity" />
+                  </button>
+
+                  <button className="w-8 h-8 overflow-hidden group">
+                    <BsBookmarksFill className="fill-white opacity-60 w-full h-full group-hover:opacity-100 duration-150 ease-linear transition-opacity" />
+                  </button>
+                </div>
+
                 <div className="object-cover relative">
                   <LazyLoadImage
                     src={
@@ -128,7 +169,14 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
                     }
                     effect={'opacity'}
                   />
-                  <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent "></div>
+                  <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent ">
+                    <button
+                      onClick={handleOnViewDetail}
+                      className="absolute bottom-4 right-4 text-white py-2 px-2 bg-blue-primary rounded-lg opacity-60 hover:opacity-100 z-20 duration-150 transition-opacity ease-linear"
+                    >
+                      More Details
+                    </button>
+                  </div>
                 </div>
                 <div className="text-white flex flex-col mx-4 mb-8 mt-4">
                   <span className="text-3xl font-merriweather text-dark-smooth-primary/90 py-4">

@@ -10,10 +10,9 @@ import { CgProfile } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
 import { RiCompassDiscoverLine, RiLoginBoxFill } from 'react-icons/ri';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-lazy-load-image-component/src/effects/opacity.css';
-import { ConvertCodeErrorFirebase } from '@src/utils/ConvertCodeErrorFirebase';
 interface IMobileNavBarProps {
   isOpenMenu: boolean;
   setOpenMenu: (isOpenMenu: boolean) => void;

@@ -1,0 +1,7 @@
+.tw-button-active{
+    @apply text-base text-white py-1 px-2 bg-dark-smooth-button-hover
+}
+
+.tw-button-non-active{
+    @apply text-base text-white/80 py-1 px-2 bg-dark-smooth-button-default
+}
