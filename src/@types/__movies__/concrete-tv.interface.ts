@@ -76,3 +76,5 @@ export interface Season {
     poster_path:   string;
     season_number: number;
 }
+
+

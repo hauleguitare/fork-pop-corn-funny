@@ -11,6 +11,7 @@ import SearchPage from './Search';
 import SignInPage from './SignIn';
 import SignUpPage from './SignUp';
 import TestPage from './Test';
+import WatchMovie from './WatchMovie';
 
 interface IClientRoutesProps {
   isLoggedIn: boolean;
@@ -19,9 +20,9 @@ const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
   const { isLoggedIn } = props;
   const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.search, location.pathname]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [location.search, location.pathname]);
 
   return (
     <AnimatePresence>
@@ -33,10 +34,12 @@ const ClientRoutes: React.FunctionComponent<IClientRoutesProps> = (props) => {
 
         {/* This is routes for DiscoverPage */}
         <Route path="/movie" element={<DiscoverPage type="movie" />} />
-        <Route path="movie/:tilte_movie" element={<DetailMovie type="movie" />} />
+        <Route path="movie/:title_movie" element={<DetailMovie type="movie" />} />
+        <Route path="movie/:title_movie/watch" element={<WatchMovie type="movie" />} />
 
         <Route path="/tv" element={<DiscoverPage type="tv" />} />
-        <Route path="tv/:tilte_movie" element={<DetailMovie type="tv" />} />
+        <Route path="tv/:title_movie" element={<DetailMovie type="tv" />} />
+        <Route path="tv/:title_movie/watch" element={<WatchMovie type="tv" />} />
 
         <Route
           path="/login"

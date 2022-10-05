@@ -31,12 +31,11 @@ const Card: React.FunctionComponent<ICardProps> = (props) => {
   };
 
   return (
-    <div className={className}>
-      <a onClick={handleRedirect} className="relative cursor-pointer">
-        <div className="group hover:scale-105 rounded-md overflow-hidden transition ease-in duration-150 relative object-cover">
+    <a onClick={handleRedirect} className="relative cursor-pointer">
+      <div className={`group relative ${className}`}>
+        <div className="relative">
           <LazyLoadImage
             src={img ? `https://image.tmdb.org/t/p/${widthImageEndpoint}/${img}` : FallBackCard}
-            className="group-hover:shadow-2xl shadow-[#1c1b1b] transition-shadow duration-75 ease-linear"
             effect={'opacity'}
             placeholder={
               <Skeleton
@@ -47,11 +46,8 @@ const Card: React.FunctionComponent<ICardProps> = (props) => {
                 }}
               />
             }
+            className="rounded-md overflow-hidden group-hover:scale-105 transition-all duration-75 ease-linear group-hover:shadow-2xl"
           />
-
-          <p className="text-base text-white/50 group-hover:text-white font-roboto text-ellipsis overflow-hidden whitespace-nowrap pt-2">
-            {title}
-          </p>
           <div className="absolute inset-0 max-w-[60px] max-h-[60px] mx-auto my-auto">
             <BiPlayCircle
               size={'60px'}
@@ -59,8 +55,12 @@ const Card: React.FunctionComponent<ICardProps> = (props) => {
             />
           </div>
         </div>
-      </a>
-    </div>
+
+        <p className="text-base text-white/50 group-hover:text-white font-roboto text-ellipsis overflow-hidden whitespace-nowrap pt-2">
+          {title}
+        </p>
+      </div>
+    </a>
   );
 };
 

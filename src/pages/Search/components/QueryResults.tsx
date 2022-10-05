@@ -45,8 +45,8 @@ const QueryResults: React.FunctionComponent<IQueryResultsProps> = (props) => {
   return (
     <Fragment>
       <ul className="mt-8 grid grid-cols-2 up-tablet:grid-cols-5 up-mobile:grid-cols-3 gap-8 up-tablet:gap-8">
-        {isFetching && <MultiSkeleton total={20} className="w-full h-72 bg-stone-chocolate rounded-lg pr-8" />}
-        {isLoading && <MultiSkeleton total={20} className="w-full h-72 bg-stone-chocolate rounded-lg pr-8" />}
+        {isFetching && <MultiSkeleton total={20} className="w-full h-72 bg-dark-smooth-on-surface rounded-lg pr-8" />}
+        {isLoading && <MultiSkeleton total={20} className="w-full h-72 bg-dark-smooth-on-surface rounded-lg pr-8" />}
         {data &&
           data.results.map((item) => (
             <li key={item.id}>

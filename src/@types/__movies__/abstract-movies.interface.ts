@@ -28,6 +28,7 @@ export interface IAbstractMovie{
     id:                number;
     original_language: string;
     original_title?:    string;
+    media_type?: MediaType;
     overview:          string;
     popularity:        number;
     poster_path:       string;
@@ -41,6 +42,12 @@ export interface IAbstractMovie{
     origin_country?:    string[];
     original_name?:     string;
 }
+
+export enum MediaType {
+    Movie = "movie",
+    Tv = "tv",
+}
+
 
 // -------------------------------------------------------- Movie Details -------------------------------------------------------- //
 

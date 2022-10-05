@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { IconType } from 'react-icons';
 
-interface IDropdownSubMenuProps {
+interface IDropdownProps {
   parentId: string;
   title: string;
   children?: React.ReactNode;
-  Icon: IconType;
+  Icon?: IconType;
 }
 
-const DropdownSubMenu: React.FunctionComponent<IDropdownSubMenuProps> = (props) => {
+const Dropdown: React.FunctionComponent<IDropdownProps> = (props) => {
   const { parentId, title, children, Icon } = props;
   return (
     <ul className="relative">
@@ -22,7 +22,7 @@ const DropdownSubMenu: React.FunctionComponent<IDropdownSubMenuProps> = (props) 
           aria-expanded="true"
           aria-controls={`collapse${parentId}`}
         >
-          <Icon size={'30px'} />
+          {Icon && <Icon size={'30px'} />}
           <span>{title}</span>
         </div>
         {children}
@@ -31,7 +31,7 @@ const DropdownSubMenu: React.FunctionComponent<IDropdownSubMenuProps> = (props) 
   );
 };
 
-export default DropdownSubMenu;
+export default Dropdown;
 
 /*
 <ul

@@ -23,7 +23,7 @@ const QueryResults: React.FunctionComponent<IQueryResultsProps> = (props) => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 gap-8 up-laptop:grid-cols-5 w-full px-4">
-        <MultiSkeleton total={20} widthCard={'160px'} heightCard={'15rem'} />
+        <MultiSkeleton total={20} widthCard={'160px'} heightCard={'15rem'} className={'bg-dark-smooth-surface'} />
       </div>
     );
   }

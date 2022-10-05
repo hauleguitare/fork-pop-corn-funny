@@ -17,8 +17,9 @@ const SimilarSection: React.FunctionComponent<ISimilarSectionProps> = (props) =>
       <ul className="flex max-w-full overflow-x-auto overflow-y-hidden">
         {data.similar.results.map((item) => (
           <Card
-            className="min-w-[150px] up-mobile:min-w-[200px] pr-4 pb-4"
+            className="w-[185px] mr-8 pb-4"
             img={item.poster_path}
+            widthImageEndpoint={'w185'}
             title={item.title ?? item.name ?? 'Unknown name'}
             id={item.id}
             url={`/${type}/${ConvertBeautifulURL(item.id, item.title ?? item.name ?? '')}`}

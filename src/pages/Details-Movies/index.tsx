@@ -10,11 +10,11 @@ interface IDetailMovieProps {
 
 const DetailMovie: React.FunctionComponent<IDetailMovieProps> = (props) => {
   const { type } = props;
-  const { tilte_movie } = useParams();
-  if (!tilte_movie) {
+  const { title_movie } = useParams();
+  if (!title_movie) {
     return null;
   }
-  const arrTitle = tilte_movie.split('-');
+  const arrTitle = title_movie.split('-');
   const movieId = Number(arrTitle[arrTitle.length - 1]);
 
   return (

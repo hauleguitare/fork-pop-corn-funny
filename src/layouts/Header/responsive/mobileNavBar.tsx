@@ -1,5 +1,5 @@
 import GuestProfile from '@src/asserts/images/guest_profile.png';
-import DropdownSubMenu from '@src/components/DropdownSubMenu';
+import Dropdown from '@src/components/Dropdown';
 import MenuList from '@src/components/MenuList';
 import { MENU_LIST } from '@src/constants/index';
 import { SignOut } from '@src/services/Firebase/Auth/SignOut/SignOut';
@@ -102,7 +102,7 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
             </li>
             <li>
               {/*TEST */}
-              <DropdownSubMenu title="Discover" parentId="LstDiscover" Icon={RiCompassDiscoverLine}>
+              <Dropdown title="Discover" parentId="LstDiscover" Icon={RiCompassDiscoverLine}>
                 <ul
                   className="relative accordion-collapse collapse"
                   id="collapseLstDiscover"
@@ -129,7 +129,7 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
                     </Link>
                   </li>
                 </ul>
-              </DropdownSubMenu>
+              </Dropdown>
             </li>
 
             {/*TEST */}
@@ -151,7 +151,7 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
               </Fragment>
             ) : (
               <li>
-                <DropdownSubMenu title="Account" parentId="LstAccount" Icon={CgProfile}>
+                <Dropdown title="Account" parentId="LstAccount" Icon={CgProfile}>
                   <ul
                     className="relative accordion-collapse collapse"
                     id="collapseLstAccount"
@@ -197,7 +197,7 @@ const MobileNavBar: React.FunctionComponent<IMobileNavBarProps> = (props) => {
                       </button>
                     </li>
                   </ul>
-                </DropdownSubMenu>
+                </Dropdown>
               </li>
             )}
           </ul>

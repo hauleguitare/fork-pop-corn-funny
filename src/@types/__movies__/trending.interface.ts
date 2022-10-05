@@ -1,3 +1,5 @@
+import { MediaType } from "./abstract-movies.interface";
+
 export interface ITrending {
     adult:             boolean;
     backdrop_path:     string | null;
@@ -7,7 +9,7 @@ export interface ITrending {
     original_name?:    string;
     overview:          string;
     poster_path:       string | null;
-    media_type:        MediaTypeTrending;
+    media_type:        MediaType;
     genre_ids:         number[];
     popularity:        number;
     first_air_date?:   Date;
@@ -19,9 +21,3 @@ export interface ITrending {
     release_date?:     Date;
     video?:            boolean;
 }
-
-export enum MediaTypeTrending {
-    Movie = "movie",
-    Tv = "tv",
-}
-
