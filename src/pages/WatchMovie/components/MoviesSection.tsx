@@ -2,6 +2,7 @@ import { IDetailAbstractMovie, ISeasons } from '@src/@types/__movies__';
 import { fetchMovie } from '@src/api';
 import { useQuery } from '@tanstack/react-query';
 import * as React from 'react';
+import LoadingWatchMovie from '../Loading';
 import RecommendSection from './RecommendSection';
 import SeasonSection from './SeasonSection';
 import WatchFilm from './WatchFilm';
@@ -21,7 +22,7 @@ const MoviesSection: React.FunctionComponent<IMoviesSectionProps> = (props) => {
   );
 
   if (isLoading) {
-    return <div>Is loading</div>;
+    return <LoadingWatchMovie />;
   }
 
   if (isError) {
