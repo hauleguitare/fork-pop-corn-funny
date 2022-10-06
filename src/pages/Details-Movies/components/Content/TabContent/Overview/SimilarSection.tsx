@@ -17,6 +17,7 @@ const SimilarSection: React.FunctionComponent<ISimilarSectionProps> = (props) =>
       <ul className="flex max-w-full overflow-x-auto overflow-y-hidden">
         {data.similar.results.map((item) => (
           <Card
+            key={item.id}
             className="w-[185px] mr-8 pb-4"
             img={item.poster_path}
             widthImageEndpoint={'w185'}

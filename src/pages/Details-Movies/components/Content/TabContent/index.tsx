@@ -1,11 +1,12 @@
 import { IDetailAbstractMovie } from '@src/@types/__movies__';
 import * as React from 'react';
 import { AppendToResponse } from '../../QueryMovies';
-import MediaSection from './MediaSection';
-import SeasonDetails from './SeasonsDetail';
-import SimilarSection from './SimilarSection';
+import MediaSection from './Overview/MediaSection';
+import SeasonDetails from './Seasons/SeasonsDetail';
+import SimilarSection from './Overview/SimilarSection';
 
-import VideoSection from './VideoSection';
+import VideoSection from './Overview/VideoSection';
+import SeriesCastDetails from './SeriesCast';
 
 interface ITabContentProps {
   tabName: string;
@@ -30,6 +31,7 @@ const TabContent: React.FunctionComponent<ITabContentProps> = (props) => {
         </React.Fragment>
       )}
       {tabName === 'seasons' && <SeasonDetails data={data} />}
+      {tabName === 'seriescast' && <SeriesCastDetails data={data} />}
     </div>
   );
 };

@@ -4,8 +4,8 @@ import * as React from 'react';
 import { AppendToResponse } from '../QueryMovies';
 import './buttonActive.css';
 import FactSidebar from './Aside/FactSidebar';
-import SocialMedia from './TabSection/SocialMedia';
-import TabContent from './TabSection/TabContent';
+import SocialMedia from './Aside/SocialMedia';
+import TabContent from './TabContent';
 
 interface IContentSectionProps {
   data: IDetailAbstractMovie & AppendToResponse;
