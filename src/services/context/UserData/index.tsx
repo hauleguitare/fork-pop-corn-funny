@@ -1,4 +1,4 @@
-import { IUserData } from '@src/@types/__global__';
+import { IUserData } from '@src/@types/__Firebase__';
 import { db } from '@src/services/Firebase';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import * as React from 'react';

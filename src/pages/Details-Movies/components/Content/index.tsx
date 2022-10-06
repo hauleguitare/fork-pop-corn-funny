@@ -44,10 +44,10 @@ const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) =>
               Series Cast
             </button>
             <button
-              id="bt_tab_comments"
+              id="btn_tab_comments"
               onClick={handleOnClickSwitchTab}
               className={`${
-                tabDetail === 'bt_tab_comments' ? 'tw-button-active' : 'tw-button-non-active'
+                tabDetail === 'btn_tab_comments' ? 'tw-button-active' : 'tw-button-non-active'
               } transition-colors duration-150 ease-in`}
             >
               Comments

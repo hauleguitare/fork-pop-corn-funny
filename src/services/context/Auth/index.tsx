@@ -1,4 +1,4 @@
-import { IUserData } from '@src/@types/__global__';
+import { IUserData } from '@src/@types/__Firebase__';
 import { auth, db } from '@src/services/Firebase';
 import { updateAuthenticateUser } from '@src/services/Store/slices/reAuthenticate';
 import { updateUserData } from '@src/services/Store/slices/userDataSlice';

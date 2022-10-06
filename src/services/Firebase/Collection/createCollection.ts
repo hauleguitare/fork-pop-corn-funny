@@ -1,6 +1,6 @@
-import { IUserData } from "@src/@types/__global__";
+import { IResponseComment, IUserData } from "@src/@types/__Firebase__";
 import { User } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore"
 import { db } from ".."
 
 
@@ -10,7 +10,7 @@ export const createUserDocument = async (user: User) => {
     if (snapshot.exists()){
         return;
     }
-    const dataUser = {
+    const dataUser: IUserData = {
         uid: user.uid,
         images: {
             photoURL: user.photoURL ?? '',
@@ -30,4 +30,27 @@ export const createUserDocument = async (user: User) => {
     }).catch(error => {
         console.log(error)
     })
+}
+
+export const readCommentDocument = async (type: 'movie' | 'tv', movieId: number | string, callback:(data: IResponseComment) => void) => {
+    try {
+        const collectionRef = collection(db, 'comments');
+        const movie_id = String(movieId);
+        const q = query(collectionRef);
+        const querySnapShot = await getDocs(q);
+        querySnapShot.forEach((result) => {
+            if (result.id === type){
+                const fieldMovies = result.data();
+                if (Object.keys(fieldMovies).includes(movie_id)){
+                    const fieldMovie = fieldMovies[movie_id];
+                    callback(fieldMovie);
+                }else{
+                    throw new Error("firestore/not-found-field");
+                }
+            }
+        })
+    } catch (error) {
+        throw error
+    }
+    
 }

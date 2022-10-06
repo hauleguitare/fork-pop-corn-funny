@@ -1,4 +1,4 @@
-import { IUserData } from "@src/@types/__global__";
+import { IUserData } from "@src/@types/__Firebase__";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "..";
 
