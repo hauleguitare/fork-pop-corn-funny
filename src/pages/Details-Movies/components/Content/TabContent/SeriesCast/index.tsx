@@ -1,5 +1,6 @@
 import { ICredits } from '@src/@types/__movies__/append_to_response';
 import * as React from 'react';
+import FallBackCard from '@src/asserts/images/fallback_card.png';
 
 interface ISeriesCastDetailsProps {
   data: Pick<ICredits, 'credits'>;
@@ -11,10 +12,10 @@ const SeriesCastDetails: React.FunctionComponent<ISeriesCastDetailsProps> = (pro
     <div className="pt-4 mx-4">
       <ul className="py-4 flex flex-col up-mobile:flex-row up-mobile:flex-wrap max-h-[500px] overflow-auto">
         {data.credits.cast.map((item) => (
-          <li key={item.id} className="up-mobile:min-w-[490px]">
+          <li key={item.id} className="up-mobile:min-w-[490px] shrink basis-1/2">
             <a className="cursor-pointer my-4 flex up-mobile:flex-row flex-col up-mobile:items-start items-center up-mobile:py-4 up-mobile:px-4 border-white/50">
               <div className="w-[185px] shrink-0 rounded-lg overflow-hidden">
-                <img src={`https://image.tmdb.org/t/p/w185${item.profile_path}`} />
+                <img src={item.profile_path ? `https://image.tmdb.org/t/p/w185${item.profile_path}` : FallBackCard} />
               </div>
               <div className="py-4 px-4 flex flex-col shrink up-mobile:text-start text-center">
                 <span className="text-white/80 text-xl">{item.name}</span>
