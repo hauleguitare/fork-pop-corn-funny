@@ -24,6 +24,10 @@ const SearchPage: React.FunctionComponent<ISearchPageProps> = (props) => {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setSubmitQuery(searchParams.get('query') || '');
   }, [location.search]);
 

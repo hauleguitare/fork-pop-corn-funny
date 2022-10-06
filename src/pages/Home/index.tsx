@@ -7,7 +7,7 @@ import {
   TOPRATED_SECTION,
   UPCOMING_SECTION,
 } from '@src/constants/';
-import React from 'react';
+import React, { useEffect } from 'react';
 import BannerSection from './components/Banner';
 import ContentSection from './components/Content';
 
@@ -15,6 +15,9 @@ interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
   document.title = 'Home Page';
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <MotionChangePage>
       <BannerSection />

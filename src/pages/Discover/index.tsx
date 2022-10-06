@@ -24,6 +24,10 @@ const DiscoverPage: React.FunctionComponent<IDiscoverPageProps> = (props) => {
     }));
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     ParseParams('with_genres', searchParams.getAll('genre').toString());
     ParseParams('sort_by', searchParams.get('sort_by') || 'popularity.desc');
     ParseParams('with_runtime.lte', searchParams.get('maxRuntime')?.toString() || '200');

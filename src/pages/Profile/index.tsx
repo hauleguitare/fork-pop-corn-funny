@@ -32,6 +32,11 @@ const ProfilePage: React.FunctionComponent<IProfilePageProps> = (props) => {
       toast.error(`Authentication is fail, please try again ${error}`);
     }
   };
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <MotionChangePage className="text-white">
       <ToastContainer autoClose={2000} />

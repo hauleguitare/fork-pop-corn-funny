@@ -7,6 +7,10 @@ import MotionChangePage from '@src/components/MotionChangePage';
 interface INotFoundPageProps {}
 
 const NotFoundPage: React.FunctionComponent<INotFoundPageProps> = (props) => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <MotionChangePage>
       <div className="flex flex-col max-w-7xl items-center mx-auto mt-8 container overflow-hidden">

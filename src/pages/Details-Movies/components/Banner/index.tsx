@@ -4,14 +4,27 @@ import Skeleton from '@src/components/Skeleton';
 import * as React from 'react';
 import { BsBookmarksFill, BsShareFill } from 'react-icons/bs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useNavigate } from 'react-router-dom';
 import BannerLoading from './Loading';
 
 interface IBannerSectionProps {
   data: IDetailAbstractMovie;
+  type: string;
 }
 
 const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
-  const { data } = props;
+  const { data, type } = props;
+  const navigate = useNavigate();
+
+  const handleOnClickWatch = (e: React.MouseEvent) => {
+    if (type === 'tv') {
+      navigate('watch?season=1&ep=1');
+    } else if (type === 'movie') {
+      navigate('watch');
+    } else {
+      return;
+    }
+  };
 
   return (
     <div
@@ -26,7 +39,14 @@ const BannerSection: React.FunctionComponent<IBannerSectionProps> = (props) => {
       <div className="absolute inset-0 bg-black/50">
         <div className="flex w-full translate-y-1/2 container px-4 up-mobile:px-0">
           <div className="object-cover overflow-hidden rounded-lg up-mobile:max-w-[185px] up-mobile:max-h-[263px] max-w-[100px] max-h-[200px]">
-            <LazyLoadImage src={data.poster_path ? `https://image.tmdb.org/t/p/w185/${data.poster_path}` : ''} />
+            <a onClick={handleOnClickWatch} className="cursor-pointer group relative">
+              <LazyLoadImage src={data.poster_path ? `https://image.tmdb.org/t/p/w185/${data.poster_path}` : ''} />
+              <div className="group-hover:visible group-hover:bg-black/50 bg-transparent invisible transition-all duration-150 ease-linear absolute inset-0 flex items-center justify-center">
+                <p className="font-roboto py-2 px-2 bg-blue-primary rounded-lg opacity-60 hover:opacity-100 text-xl text-white/60 hover:text-white/80 group-hover:visible transition-all invisible duration-150 ease-linear">
+                  Watch
+                </p>
+              </div>
+            </a>
           </div>
           <div className="pl-8 font-roboto">
             <p className="text-dark-smooth-primary up-mobile:text-4xl text-lg font-oswald">

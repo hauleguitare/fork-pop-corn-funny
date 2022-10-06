@@ -52,7 +52,7 @@ const QueryMovies: React.FunctionComponent<IQueryMoviesProps> = (props) => {
     <div>
       {data && (
         <React.Fragment>
-          <BannerSection data={data} />
+          <BannerSection data={data} type={type} />
           <ContentSection data={data} type={type} />
         </React.Fragment>
       )}

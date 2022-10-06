@@ -39,6 +39,10 @@ const SignInPage: React.FunctionComponent<ISignInPageProps> = (props) => {
     }
   };
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <MotionChangePage>
       <div className="w-full text-white container min-h-screen">

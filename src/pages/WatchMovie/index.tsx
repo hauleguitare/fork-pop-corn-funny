@@ -12,6 +12,10 @@ const WatchMovie: React.FunctionComponent<IWatchMovieProps> = (props) => {
   if (!title_movie) {
     return null;
   }
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const arrTitle = title_movie.split('-');
   const movieId = Number(arrTitle[arrTitle.length - 1]);
   return (
