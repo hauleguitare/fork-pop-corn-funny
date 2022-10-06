@@ -15,9 +15,9 @@ import ListGenres from '../ListGenres';
 import ModalTemplete from '../ModalTemplete';
 import RatingStar from '../RatingStar';
 
-interface IReviewMovieProps {}
+interface IModalMoviesProps {}
 
-const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
+const ModalMovies: React.FunctionComponent<IModalMoviesProps> = (props) => {
   const { width, isMobile } = useCurrentViewPort();
   const dispatch = useDispatch();
   const reviewState = useSelector((state: RootState) => state.reviewMovie.value);
@@ -126,19 +126,20 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
                 onBlur={handleOnBlur}
                 initial={{
                   opacity: 0,
-                  scale: 0,
+                  y: '100%',
                 }}
                 animate={{
                   opacity: 1,
-                  scale: 1,
+                  y: 0,
                 }}
                 exit={{
                   opacity: 0,
-                  scale: 0,
+                  y: '100%',
                 }}
                 transition={{
                   type: 'spring',
                   duration: 0.8,
+                  delay: 0.2,
                 }}
                 className="text-white min-w-[600px] max-h-screen bg-dark-smooth-surface translate-y-8 rounded-lg overflow-scroll overscroll-contain"
               >
@@ -164,7 +165,7 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
                 <div className="object-cover relative">
                   <LazyLoadImage
                     src={
-                      reviewState.movie?.poster_path
+                      reviewState.movie?.backdrop_path
                         ? `https://image.tmdb.org/t/p/w1280/${reviewState.movie.backdrop_path}`
                         : FallBackBackdrop
                     }
@@ -213,4 +214,4 @@ const ReviewMovie: React.FunctionComponent<IReviewMovieProps> = (props) => {
   );
 };
 
-export default ReviewMovie;
+export default ModalMovies;

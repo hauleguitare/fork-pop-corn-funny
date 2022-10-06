@@ -1,5 +1,5 @@
+import ModalMovies from '@src/components/ModalMovies';
 import MotionChangePage from '@src/components/MotionChangePage';
-import ReviewMovie from '@src/components/ReviewMovie';
 import {
   AIRINGTODAY_SECTION,
   ONTV_SECTION,
@@ -26,7 +26,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
       <ContentSection sectionType={UPCOMING_SECTION} title={`Are you missing Upcoming`} />
       <ContentSection sectionType={ONTV_SECTION} title={`On the Air`} />
       <ContentSection sectionType={AIRINGTODAY_SECTION} title={`Don't forget Aring Today`} />
-      <ReviewMovie />
+      <ModalMovies />
     </MotionChangePage>
   );
 };
