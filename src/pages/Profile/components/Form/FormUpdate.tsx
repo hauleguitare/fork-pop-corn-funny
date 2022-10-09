@@ -1,5 +1,5 @@
 import FormContainer from '@src/components/FormContainer';
-import { updateProfile } from '@src/services/Firebase/Update/updateProfile';
+import { updateProfile } from '@src/services/Firebase/Auth/Update/updateProfile';
 import { useAppSelector } from '@src/services/Store';
 import { User } from 'firebase/auth';
 import { Field } from 'formik';

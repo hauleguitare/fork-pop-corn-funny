@@ -1,7 +1,7 @@
 import { IupdateProfile } from "@src/@types/__global__";
 import { FirebaseError } from "firebase/app";
 import { EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword, User } from "firebase/auth"
-import { updateUserFieldInfomation } from "../Collection/updateDocument";
+import { updateUserFieldInfomation } from "../../Documents/updateDocument";
 
 export const updateProfile = async (currentUser: User | null, data: IupdateProfile) =>{
     try {

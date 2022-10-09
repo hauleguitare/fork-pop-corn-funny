@@ -1,6 +1,6 @@
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../..';
-import { createUserDocument } from '../../Collection/createCollection';
+import { createUserDocument } from '../../Documents/addDocument';
 
 
 const providerGoogle = new GoogleAuthProvider();

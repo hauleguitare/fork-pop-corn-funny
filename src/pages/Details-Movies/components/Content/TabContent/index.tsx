@@ -34,7 +34,7 @@ const TabContent: React.FunctionComponent<ITabContentProps> = (props) => {
       )}
       {tabName === 'seasons' && <SeasonDetails data={data} />}
       {tabName === 'seriescast' && <SeriesCastDetails data={data} />}
-      {tabName === 'comments' && <CommentDetails />}
+      {tabName === 'comments' && <CommentDetails movieId={data.id} type={type} />}
     </div>
   );
 };

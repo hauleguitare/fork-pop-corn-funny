@@ -22,8 +22,8 @@ const UserDataProvider: React.FunctionComponent<IUserDataProviderProps> = (props
     if (!auth) {
       return;
     }
-    const docRef = doc(db, 'users', auth.uid);
-    const unSubscribe = onSnapshot(docRef, (snapshot) => {
+    const refDoc = doc(db, 'users', auth.uid);
+    const unSubscribe = onSnapshot(refDoc, (snapshot) => {
       const data = snapshot.data() as IUserData;
       setUserData(data);
     });

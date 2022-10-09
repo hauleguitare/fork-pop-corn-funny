@@ -19,11 +19,13 @@ export const buttonVariants: Variants = {
     },
 
     onTap: {
-        scale: 1.3,
-        rotate: [18, 0, -18, 0],
+        scale: 2,
+        opacity: 0.08,
         transition: {
-        duration: 0.8,
-        },
+            duration: 0.23,
+            stiffness: 50,
+            ease: 'easeInOut'
+        }
     },
     inView: {
         scale: 1,
@@ -50,5 +52,25 @@ export const buttonVariants: Variants = {
             type: 'spring',
             stiffness: 50
         }
+    },
+}
+
+export const ReactionsBarVariants: Variants = {
+    initial: {
+        scale: 1,
+        opacity: 1
+    },
+    animate: {
+        scale: 1.2
+    },
+    onHover: {
+        scale: 1.3,
+        rotate: [12, 0, -12, 0],
+        transition:{
+            duration: 0.3,
+            rotate: {
+                duration: 0.8
+            }
+        },
     },
 }

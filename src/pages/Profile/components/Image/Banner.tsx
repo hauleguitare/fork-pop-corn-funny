@@ -1,6 +1,6 @@
 import { uploadImage } from '@src/api/uploadImage';
 import { useUserData } from '@src/services/context/UserData';
-import { updateFieldDocument, updateUserFieldImages } from '@src/services/Firebase/Collection/updateDocument';
+import { updateFieldDocument, updateUserFieldImages } from '@src/services/Firebase/Documents/updateDocument';
 import { RootState, useAppSelector } from '@src/services/Store';
 import React, { Fragment, useState } from 'react';
 import { BsImages } from 'react-icons/bs';

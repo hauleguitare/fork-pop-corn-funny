@@ -1,10 +1,9 @@
 import { IDetailAbstractMovie } from '@src/@types/__movies__';
-import { IExternal } from '@src/@types/__movies__/append_to_response';
 import * as React from 'react';
 import { AppendToResponse } from '../QueryMovies';
-import './buttonActive.css';
 import FactSidebar from './Aside/FactSidebar';
 import SocialMedia from './Aside/SocialMedia';
+import './buttonActive.css';
 import TabContent from './TabContent';
 
 interface IContentSectionProps {
@@ -15,7 +14,6 @@ interface IContentSectionProps {
 const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) => {
   const { data, type } = props;
   const [tabDetail, setTabDetail] = React.useState('btn_tab_overview');
-
   const handleOnClickSwitchTab = (e: React.MouseEvent) => {
     setTabDetail(e.currentTarget.id);
   };

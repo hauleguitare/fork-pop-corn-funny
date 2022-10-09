@@ -9,12 +9,18 @@ interface IReactionProps {
     'data-escaped'?: string | undefined;
   };
   style?: MotionStyle;
+  onReaction: (type: string) => void;
 }
 
 const Reaction: React.FunctionComponent<IReactionProps> = (props) => {
-  const { attrs, style } = props;
+  const { attrs, style, onReaction } = props;
   const container = React.useRef(null);
   const isInView = useInView(container);
+
+  const handleOnReact = (type: string) => {
+    onReaction(type);
+  };
+
   return (
     <motion.div
       ref={container}
@@ -34,7 +40,7 @@ const Reaction: React.FunctionComponent<IReactionProps> = (props) => {
           delay: 0.1,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        onClick={() => console.log('Reaction: Like')}
+        onClick={(e) => handleOnReact('like')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +74,7 @@ const Reaction: React.FunctionComponent<IReactionProps> = (props) => {
             duration: 0.3,
           },
         }}
-        onClick={() => console.log('Reaction: Unlike')}
+        onClick={(e) => handleOnReact('dislike')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +108,7 @@ const Reaction: React.FunctionComponent<IReactionProps> = (props) => {
             duration: 0.3,
           },
         }}
-        onClick={() => console.log('Reaction: Love')}
+        onClick={(e) => handleOnReact('love')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +141,7 @@ const Reaction: React.FunctionComponent<IReactionProps> = (props) => {
             duration: 0.3,
           },
         }}
-        onClick={() => console.log('Reaction: Sad')}
+        onClick={(e) => handleOnReact('sad')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

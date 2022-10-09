@@ -4,9 +4,9 @@ import { db } from "../..";
 
 export const DeleteAccount = async(currentUser: User) =>{
     try{
-        const refDoc = doc(db, 'users', currentUser.uid);
+        const docRef = doc(db, 'users', currentUser.uid);
         await deleteUser(currentUser);
-        await deleteDoc(refDoc);
+        await deleteDoc(docRef);
     }catch(error){
         throw error;
     }

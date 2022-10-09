@@ -1,17 +1,35 @@
 import { Timestamp } from "firebase/firestore";
-import { IUserData } from "./userdata.interface"
 
-export interface IComment {
-    sender: Omit<IUserData, 'recently' | 'watchlist'>
-    content: string,
-    createAt: Timestamp,
-    down_vote_count: number,
-    love_vote_count: number,
-    sad_vote_count: number,
-    up_vote_count:number,
-    comments?: IComment | null
+export interface IReaction{
+    uid: string
+    type: 'like' | 'dislike' | 'love' | 'sad'
 }
 
-export interface IResponseComment {
-    comments: IComment[];
+export interface IReactions {
+  like_count: number,
+  dislike_count: number,
+  love_count: number,
+  sad_count: number,
+  reactions: IReaction[]
 }
+
+
+export interface IComment extends IReactions{
+  id: string,
+  uid: string,
+  content: string,
+  createAt: Timestamp,
+}
+
+
+export interface IReply extends IReactions{
+  id: string,
+  uid: string,
+  content: string,
+  ref: string,
+  createAt: Timestamp,
+}
+
+export interface ISubmitComment extends Omit<IComment, 'createAt' | 'id'>{}
+export interface ISubmitReply extends Omit<IReply, 'createAt' | 'id'>{}
+

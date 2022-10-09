@@ -1,16 +1,28 @@
 import * as React from 'react';
 import { AiOutlineSend } from 'react-icons/ai';
 import { FiSend } from 'react-icons/fi';
+import GuestProfile from '@src/asserts/images/guest_profile.png';
+import { useAuth } from '@src/services/context/Auth';
+import { useAppSelector } from '@src/services/Store';
 
-interface IInputCommentProps {}
+interface IInputCommentProps {
+  onSubmit: (value: string) => void;
+}
 
 const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
+  const { onSubmit } = props;
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const userData = useAppSelector((root) => root.userData.user);
+  if (!userData) {
+    return null;
+  }
 
+  // Handle Event
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputRef.current) {
-      console.log(inputRef.current.value);
+      onSubmit(inputRef.current.value.trim());
+      inputRef.current.value = '';
     }
   };
   return (
@@ -19,7 +31,7 @@ const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
       className="w-full flex items-center up-mobile:relative fixed bottom-0 right-0 left-0 up-mobile:py-2 up-mobile:z-0 z-50 py-4 up-mobile:bg-transparent bg-dark-smooth-theme"
     >
       <img
-        src="https://giaitri.vn/wp-content/uploads/2019/07/avatar-la-gi-01.jpg"
+        src={userData.images.photoURL ? userData.images.photoURL : GuestProfile}
         alt=""
         className=" object-cover w-10 h-10 rounded-full"
       />
@@ -27,7 +39,8 @@ const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
         autoFocus
         ref={inputRef}
         className="w-full mx-2 py-2 px-4 outline-none text-white/80 bg-dark-smooth-on-surface rounded-lg"
-      ></input>
+        placeholder="Write your comment..."
+      />
       <button type="submit">
         <AiOutlineSend
           size={'28px'}

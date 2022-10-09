@@ -1,6 +1,6 @@
 import { uploadImage } from '@src/api/uploadImage';
 import GuestProfile from '@src/asserts/images/guest_profile.png';
-import { updateUserFieldImages } from '@src/services/Firebase/Collection/updateDocument';
+import { updateUserFieldImages } from '@src/services/Firebase/Documents/updateDocument';
 import { RootState } from '@src/services/Store';
 import * as React from 'react';
 import { FaSpinner } from 'react-icons/fa';

@@ -3,12 +3,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import reviewMovieReducer from './slices/reviewMovieSlice';
 import userDataReducer from './slices/userDataSlice';
 import reAuthenticateReducer from "./slices/reAuthenticate";
+import commentsReducer from './slices/commentsSlice';
 
 export const store = configureStore({
     reducer: {
         reviewMovie: reviewMovieReducer,
         userData: userDataReducer,
-        reAuthenticate: reAuthenticateReducer
+        reAuthenticate: reAuthenticateReducer,
+        comments: commentsReducer
     },
     middleware: [
         ...getDefaultMiddleware({

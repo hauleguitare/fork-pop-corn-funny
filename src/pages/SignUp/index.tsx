@@ -3,7 +3,7 @@ import MotionChangePage from '@src/components/MotionChangePage';
 import { useAuth } from '@src/services/context/Auth';
 import { SignInWithProvider } from '@src/services/Firebase/Auth/SignIn/SignInWithProvider';
 import { SignUpUserWithEmailAndPassWord } from '@src/services/Firebase/Auth/SignUp/SignUpUserWithEmailAndPassword';
-import { createUserDocument } from '@src/services/Firebase/Collection/createCollection';
+import { createUserDocument } from '@src/services/Firebase/Documents/addDocument';
 import { sendEmailVerification, updateProfile } from 'firebase/auth';
 import * as React from 'react';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';

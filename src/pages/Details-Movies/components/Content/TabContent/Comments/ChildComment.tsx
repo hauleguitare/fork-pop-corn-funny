@@ -1,30 +1,24 @@
-import { useSpring } from 'framer-motion';
+import { IConvertReplies } from '@src/@types/__global__';
+import { useAuth } from '@src/services/context/Auth';
 import * as React from 'react';
-import { Instance, Props } from 'tippy.js';
-import Tippy from '@tippyjs/react/headless';
-import Reaction from './Reaction';
-import InputComment from './InputComment';
+import ReactionBarWrapper from './ReactionBarWrapper';
+import GuestProfile from '@src/asserts/images/guest_profile.png';
 
-interface IChildCommentProps {}
+interface IChildCommentProps {
+  type: string;
+  movieId: number;
+  reply: IConvertReplies;
+}
 
 const ChildComment: React.FunctionComponent<IChildCommentProps> = (props) => {
-  const springConfig = { damping: 15, stiffness: 300 };
-  const initialScale = 0.5;
-  const opacity = useSpring(0, springConfig);
+  const { type, movieId, reply } = props;
+  const { sender, data } = reply;
+  const auth = useAuth();
 
-  // Handle Event
-  const handleOnMount = () => {
-    opacity.set(1);
-  };
-
-  const handleOnUnMount = (instance: Instance<Props>) => {
-    const cleanup = opacity.onChange((value) => {
-      if (value <= initialScale) {
-        cleanup();
-        instance.unmount();
-      }
-    });
-    opacity.set(0);
+  const handleOnReaction = async (reactionType: string) => {
+    if (!auth) {
+      return;
+    }
   };
 
   return (
@@ -32,37 +26,29 @@ const ChildComment: React.FunctionComponent<IChildCommentProps> = (props) => {
       <div className="pl-8 pb-8 relative">
         <div className="flex">
           <img
-            src="https://giaitri.vn/wp-content/uploads/2019/07/avatar-la-gi-01.jpg"
-            alt=""
+            src={sender.images.photoURL ? sender.images.photoURL : GuestProfile}
+            alt="photoURL"
             className=" object-cover w-12 h-12 rounded-full"
           />
           <div className="mx-4 w-full ">
-            <div className="py-2 px-4 bg-dark-smooth-on-surface text-sm rounded-lg">
-              <span className="text-white/80">Username</span>
+            <div className="py-2 px-4 bg-dark-smooth-on-surface text-sm rounded-lg relative">
+              <span className="text-white/80">{sender.information.displayName}</span>
               <div className="py-2">
-                <p className="text-white/60">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas culpa laboriosam ut sequi beatae a
-                  ipsa, quod id possimus harum accusantium aspernatur atque, error voluptate praesentium voluptatum eos,
-                  nihil quas!
-                </p>
+                <p className="text-white/60">{data.content}</p>
               </div>
+              {/* <ShowReactions
+                like_count={like_count}
+                dislike_count={dislike_count}
+                love_count={love_count}
+                sad_count={sad_count}
+                reactions={reactions}
+              /> */}
             </div>
-            <div className="text-white/80 inline-flex gap-4 pt-2 px-4">
-              <div>
-                <Tippy
-                  onMount={handleOnMount}
-                  onHide={handleOnUnMount}
-                  animation={true}
-                  offset={[30, 5]}
-                  interactive
-                  delay={[230, 0]}
-                  placement={'bottom'}
-                  render={(attrs) => <Reaction style={{ opacity }} attrs={attrs} />}
-                >
-                  <button onClick={() => console.log('Reaction: from Parent Like')}>Like</button>
-                </Tippy>
-              </div>
-              <span className="text-sm text-white/60 inline-flex items-center">Just now</span>
+            <div className="text-white/80 inline-flex items-center gap-4 pt-4 px-4">
+              <ReactionBarWrapper onReaction={handleOnReaction} />
+              <span className="text-sm text-white/60 inline-flex items-center">
+                {data.createAt.toDate().toDateString()}
+              </span>
             </div>
           </div>
         </div>
