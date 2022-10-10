@@ -1,4 +1,4 @@
-import { IReaction } from '@src/@types/__Firebase__';
+import { IReaction, IReactions } from '@src/@types/__Firebase__';
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { ReactionsBarVariants } from './reactionAnimation';
@@ -10,11 +10,10 @@ interface IShowReactionsProps {
   dislike_count: number;
   love_count: number;
   sad_count: number;
-  reactions: IReaction[];
 }
 
 const ShowReactions: React.FunctionComponent<IShowReactionsProps> = (props) => {
-  const { like_count, dislike_count, love_count, sad_count, reactions } = props;
+  const { like_count, dislike_count, love_count, sad_count } = props;
   const totalReaction = dislike_count + like_count + love_count + sad_count;
 
   return (

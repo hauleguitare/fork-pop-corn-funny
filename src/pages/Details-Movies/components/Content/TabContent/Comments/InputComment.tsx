@@ -7,10 +7,11 @@ import { useAppSelector } from '@src/services/Store';
 
 interface IInputCommentProps {
   onSubmit: (value: string) => void;
+  placeholder?: string;
 }
 
 const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
-  const { onSubmit } = props;
+  const { onSubmit, placeholder } = props;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const userData = useAppSelector((root) => root.userData.user);
   if (!userData) {
@@ -39,7 +40,7 @@ const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
         autoFocus
         ref={inputRef}
         className="w-full mx-2 py-2 px-4 outline-none text-white/80 bg-dark-smooth-on-surface rounded-lg"
-        placeholder="Write your comment..."
+        placeholder={placeholder ?? 'Write your comment...'}
       />
       <button type="submit">
         <AiOutlineSend

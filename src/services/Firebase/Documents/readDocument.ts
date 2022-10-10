@@ -1,6 +1,6 @@
 import { IComment, IReply, IUserData } from "@src/@types/__Firebase__";
 import { IConvertComment, IConvertReplies } from "@src/@types/__global__";
-import { collection, doc, DocumentData, DocumentReference, getDoc, getDocs, query } from "firebase/firestore";
+import { collection, doc, DocumentData, DocumentReference, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "..";
 
 
@@ -60,7 +60,7 @@ export const readAllRepliesDocument = async (media_type: string,movieId: number 
 export const readAllCommentsDocument =async (media_type: string, movieId: number):Promise<IConvertComment[] | null> => {
     try {
         const rootCollectionRef = collection(db, 'comments');
-        const q = query(collection(rootCollectionRef,media_type, movieId.toString()));
+        const q = query(collection(rootCollectionRef,media_type, movieId.toString()), orderBy('createAt', 'desc'));
         const querySnapshot = await getDocs(q);
         if (querySnapshot.empty){
             return null
@@ -117,4 +117,35 @@ export const readSingleCommentDocument =async (media_type: string, movieId: numb
     } catch (error) {
         throw error
     }
+}
+
+export const readSingleReplyDocument =async (media_type: string, movieId: number, comment_id: string):Promise<IConvertReplies | null> => {
+    try {
+        const rootCollectionRef = collection(db, 'replies');
+        const q = query(collection(rootCollectionRef,media_type, movieId.toString()));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty){
+            return null
+        }
+        var docRef: any;
+        querySnapshot.forEach((doc) => {
+            const dataDoc = doc.data() as IReply;
+            if (dataDoc.id === comment_id){
+                docRef = doc.ref;
+            }
+        })
+        if (!docRef){
+            throw new Error("Don't find document Ref");
+        }
+        const replyDoc = await getDoc(docRef);
+        const dataDoc = replyDoc.data() as IReply;
+        const sender = await readUserDocument(dataDoc.uid);
+        return {
+            sender,
+            data: dataDoc
+        }
+    } catch (error) {
+        throw error
+    }
+    
 }

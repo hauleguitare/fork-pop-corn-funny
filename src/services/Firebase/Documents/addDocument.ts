@@ -1,8 +1,8 @@
-import { IComment, IReactions, IReply, ISubmitComment, ISubmitReply, IUserData } from "@src/@types/__Firebase__";
+import { ISubmitComment, ISubmitReply, IUserData } from "@src/@types/__Firebase__";
 import { User } from "firebase/auth";
-import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import { ulid } from 'ulid';
 import { db } from "..";
-import {ulid} from 'ulid';
 
 
 export const createUserDocument = async (user: User) => {
@@ -51,6 +51,7 @@ export const createCommentDocument = async (media_type: string, movie_id: number
     await addDoc(commentsCollectionRef, {
         id,
         createAt,
+        isEdit: false,
         ...data
     })
     } catch (error) {
@@ -72,11 +73,12 @@ export const createReplyDocument = async (media_type: string, movie_id: number,u
             dislike_count: 0,
             sad_count: 0,
             love_count: 0,
-            reactions: []
+            reactions: [],
         }
         await addDoc(repliesCollectionRef, {
             id,
             createAt,
+            isEdit: false,
             ...data
         })
     } catch (error) {
@@ -84,93 +86,3 @@ export const createReplyDocument = async (media_type: string, movie_id: number,u
     }
 }
 
-const MiddleWareReaction = (data: IReactions ,ReactionType: string, sender_uid: string) => {
-    switch(ReactionType){
-        case 'like': {
-            const temp = data.reactions;
-            temp.push({
-                type: 'like',
-                uid: sender_uid
-            });
-            return {
-                like_count: data.like_count + 1,
-                reactions: temp
-            }
-        }
-        case 'dislike': {
-            const temp = data.reactions;
-            temp.push({
-                type: 'dislike',
-                uid: sender_uid
-            });
-            return {
-                dislike: data.dislike_count + 1,
-                reactions: temp
-            }
-        }
-        case 'love':{
-            const temp = data.reactions;
-            temp.push({
-                type: 'love',
-                uid: sender_uid
-            });
-            return {
-                love_count: data.love_count + 1,
-                reactions: temp
-            }
-        }
-           
-        case 'sad':{
-            const temp = data.reactions;
-            temp.push({
-                type: 'sad',
-                uid: sender_uid
-            });
-            return {
-                sad_count: data.sad_count + 1,
-                reactions: temp
-            }
-        }
-        default:
-            return;
-    }
-}
-
-export const createReactionDocument = async (media_type: string, movie_id: number, uid: string, ReactionType: string,reactionTo: string , referenceReplies?: boolean) => {
-    try {
-        // if as have ref, will map through replies to add reaction to in sub-collection of comment that
-        if (referenceReplies){
-            const rootCollectionRef = collection(db, 'replies');
-            const q = query(collection(rootCollectionRef, media_type, movie_id.toString()));
-            const querySnapShot = await getDocs(q);
-            querySnapShot.forEach(async (doc) => {
-                try {
-                    const dataDoc = doc.data() as IReply;
-                    if (dataDoc.id === reactionTo){
-                        const updateReactions = MiddleWareReaction(dataDoc, ReactionType, uid);
-                        await updateDoc(doc.ref, {...updateReactions});
-                    }
-                } catch (error) {
-                    throw error
-                }
-            })
-        }else{
-            const rootCollectionRef = collection(db, 'comments');
-            const q = query(collection(rootCollectionRef, media_type, movie_id.toString()));
-            const querySnapShot = await getDocs(q);
-            querySnapShot.forEach(async(doc) => {
-                try {
-                    const dataDoc = doc.data() as IComment;
-                    if (dataDoc.id === reactionTo){
-                        const updateReactions = MiddleWareReaction(dataDoc, ReactionType, uid);
-                        await updateDoc(doc.ref, {...updateReactions});
-                    }
-                } catch (error) {
-                    throw error
-                }
-            })
-        }
-    } catch (error) {
-        throw error
-    }
-}

@@ -1,11 +1,20 @@
-import { IComment } from '@src/@types/__Firebase__';
+import { IComment, IReply } from '@src/@types/__Firebase__';
 import { useAuth } from '@src/services/context/Auth';
 import { db } from '@src/services/Firebase';
 import { createCommentDocument } from '@src/services/Firebase/Documents/addDocument';
-import { readSingleCommentDocument } from '@src/services/Firebase/Documents/readDocument';
+import { readSingleCommentDocument, readSingleReplyDocument } from '@src/services/Firebase/Documents/readDocument';
 import { useAppDispatch, useAppSelector } from '@src/services/Store';
-import { addComment, updateComment } from '@src/services/Store/slices/commentsSlice';
+import {
+  addComment,
+  addReply,
+  removeComment,
+  removeReply,
+  updateComment,
+  updateReply,
+} from '@src/services/Store/slices/commentsSlice';
 import { collection, onSnapshot } from 'firebase/firestore';
+import { motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 import InputComment from './InputComment';
 import ParentComment from './ParentComment';
@@ -26,8 +35,8 @@ const CommentDetails: React.FunctionComponent<ICommentDetailsProps> = (props) =>
     if (!auth) {
       return;
     }
-    const rootCollectionRef = collection(db, 'comments');
-    const commentsCollectionRef = collection(rootCollectionRef, type, movieId.toString());
+    const rootCommentsCollectionRef = collection(db, 'comments');
+    const commentsCollectionRef = collection(rootCommentsCollectionRef, type, movieId.toString());
     const unSubcribeComments = onSnapshot(commentsCollectionRef, (snapshot) => {
       snapshot.docChanges().forEach(async (result) => {
         const dataChange = result.doc.data() as IComment;
@@ -41,10 +50,38 @@ const CommentDetails: React.FunctionComponent<ICommentDetailsProps> = (props) =>
           }
           dispatch(addComment(newData));
         }
+
+        if (result.type === 'removed') {
+          dispatch(removeComment(dataChange.id));
+        }
+      });
+    });
+
+    const rootRepliesCollectionRef = collection(db, 'replies');
+    const repliesCollectionRef = collection(rootRepliesCollectionRef, type, movieId.toString());
+    const unSubcribeReplies = onSnapshot(repliesCollectionRef, (snapshot) => {
+      snapshot.docChanges().forEach(async (result) => {
+        const dataChange = result.doc.data() as IReply;
+        if (result.type === 'modified') {
+          dispatch(updateReply(dataChange));
+        }
+
+        if (result.type === 'added') {
+          const newData = await readSingleReplyDocument(type, movieId, dataChange.id);
+          if (!newData) {
+            return;
+          }
+          dispatch(addReply(newData));
+        }
+
+        if (result.type === 'removed') {
+          dispatch(removeReply(dataChange.id));
+        }
       });
     });
     return () => {
       unSubcribeComments();
+      unSubcribeReplies();
     };
   }, []);
 
@@ -64,7 +101,7 @@ const CommentDetails: React.FunctionComponent<ICommentDetailsProps> = (props) =>
       {comments ? (
         <ul>
           {comments.map((comment) => (
-            <ParentComment type={type} movieId={movieId} comment={comment} />
+            <ParentComment key={comment.data.id} type={type} movieId={movieId} comment={comment} />
           ))}
         </ul>
       ) : (

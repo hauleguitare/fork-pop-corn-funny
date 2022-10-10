@@ -19,6 +19,7 @@ export interface IComment extends IReactions{
   uid: string,
   content: string,
   createAt: Timestamp,
+  isEdit: boolean
 }
 
 
@@ -28,8 +29,9 @@ export interface IReply extends IReactions{
   content: string,
   ref: string,
   createAt: Timestamp,
+  isEdit: boolean
 }
 
-export interface ISubmitComment extends Omit<IComment, 'createAt' | 'id'>{}
-export interface ISubmitReply extends Omit<IReply, 'createAt' | 'id'>{}
+export interface ISubmitComment extends Omit<IComment, 'createAt' | 'id' | 'isEdit'>{}
+export interface ISubmitReply extends Omit<IReply, 'createAt' | 'id' | 'isEdit'>{}
 
