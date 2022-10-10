@@ -74,3 +74,26 @@ export const ReactionsBarVariants: Variants = {
         },
     },
 }
+
+export const CommentVariants: Variants = {
+    initial: {
+        y: '50%',
+        opacity: 0.3,
+        transition:{
+            duration: 0.2,
+            delay: 0.1
+        }
+    },
+    animate: {
+        y: 0,
+        opacity: 1
+    },
+    exit: {
+        y: '50%',
+        opacity: 0,
+        transition:{
+            duration: 0.2,
+            delay: 0.1
+        }
+    }
+}
