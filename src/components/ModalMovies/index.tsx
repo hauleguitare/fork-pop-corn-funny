@@ -6,6 +6,7 @@ import { removeReview } from '@src/services/Store/slices/reviewMovieSlice';
 import { ConvertBeautifulURL } from '@src/utils/ConvertBeautifulURL';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { Fragment } from 'react';
+import { BiPlayCircle } from 'react-icons/bi';
 import { BsArrowLeftCircleFill, BsBookmarksFill, BsShareFill } from 'react-icons/bs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
@@ -39,6 +40,16 @@ const ModalMovies: React.FunctionComponent<IModalMoviesProps> = (props) => {
     navigate(`${type}/${url}`, {
       replace: true,
     });
+  };
+
+  const handleOnClickWatch = () => {
+    if (!reviewState) {
+      return;
+    }
+    dispatch(removeReview());
+    const url = ConvertBeautifulURL(reviewState.movie.id, reviewState.movie.title ?? reviewState.movie.name) ?? '404';
+    const type = reviewState.media_type;
+    navigate(`${type}/${url}/watch${type === 'tv' ? '?season=1&ep=1' : ''}`);
   };
 
   return (
@@ -91,9 +102,13 @@ const ModalMovies: React.FunctionComponent<IModalMoviesProps> = (props) => {
                   effect={'opacity'}
                 />
                 <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent ">
-                  <button className="absolute bottom-4 right-4 text-white py-2 px-2 bg-blue-primary rounded-lg opacity-60 hover:opacity-100 z-20 duration-150 transition-opacity ease-linear">
+                  <button
+                    onClick={handleOnViewDetail}
+                    className="absolute bottom-4 right-4 text-white py-2 px-2 bg-blue-primary rounded-lg opacity-60 hover:opacity-100 z-20 duration-150 transition-opacity ease-linear"
+                  >
                     More Details
                   </button>
+                  <button className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Hello</button>
                 </div>
               </div>
               <div className="text-white flex flex-col mx-4 mb-8 mt-4">
@@ -171,12 +186,21 @@ const ModalMovies: React.FunctionComponent<IModalMoviesProps> = (props) => {
                     }
                     effect={'opacity'}
                   />
-                  <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent ">
+                  <div className="absolute bottom-0 right-0 left-0 h-full bg-gradient-to-b to-dark-smooth-theme via-dark-smooth-theme/45 from-transparent group">
                     <button
                       onClick={handleOnViewDetail}
                       className="absolute bottom-4 right-4 text-white py-2 px-2 bg-blue-primary rounded-lg opacity-60 hover:opacity-100 z-20 duration-150 transition-opacity ease-linear"
                     >
                       More Details
+                    </button>
+                    <button
+                      onClick={handleOnClickWatch}
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:visible invisible"
+                    >
+                      <BiPlayCircle
+                        size={'60px'}
+                        className="group-hover:visible group-hover:scale-100 hover:opacity-100 invisible scale-125 fill-white opacity-50 transition duration-150 ease-in"
+                      />
                     </button>
                   </div>
                 </div>

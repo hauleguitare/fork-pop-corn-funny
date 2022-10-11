@@ -8,10 +8,11 @@ import { useAppSelector } from '@src/services/Store';
 interface IInputCommentProps {
   onSubmit: (value: string) => void;
   placeholder?: string;
+  placementFloating?: boolean;
 }
 
 const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
-  const { onSubmit, placeholder } = props;
+  const { onSubmit, placeholder, placementFloating } = props;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const userData = useAppSelector((root) => root.userData.user);
   if (!userData) {
@@ -29,7 +30,11 @@ const InputComment: React.FunctionComponent<IInputCommentProps> = (props) => {
   return (
     <form
       onSubmit={handleOnSubmit}
-      className="w-full flex items-center up-mobile:relative fixed bottom-0 right-0 left-0 up-mobile:py-2 up-mobile:z-0 z-50 py-4 up-mobile:bg-transparent bg-dark-smooth-theme"
+      className={
+        placementFloating
+          ? 'fixed bottom-0 right-0 left-0 py-4 z-50 bg-dark-smooth-theme w-full flex items-center'
+          : 'w-full flex items-center relative up-mobile:relative py-2 up-mobile:bg-transparent'
+      }
     >
       <img
         src={userData.images.photoURL ? userData.images.photoURL : GuestProfile}

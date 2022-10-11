@@ -33,9 +33,7 @@ const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) =>
       <h3 className="up-mobile:pl-0 pl-4 pt-2 inline-block text-xl text-dark-smooth-text-default/80 font-oswald pb-4 capitalize">
         {title}
       </h3>
-      <AnimatePresence>
-        {data ? <ContentSlider data={data.results} type={sectionType.type[0]} /> : <ContentLoading isLoading={true} />}
-      </AnimatePresence>
+      {data ? <ContentSlider data={data.results} type={sectionType.type[0]} /> : <ContentLoading isLoading={true} />}
     </section>
   );
 };

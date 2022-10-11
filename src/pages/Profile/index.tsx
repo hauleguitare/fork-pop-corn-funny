@@ -11,6 +11,7 @@ import ProfileImage from './components/Image';
 interface IProfilePageProps {}
 
 const ProfilePage: React.FunctionComponent<IProfilePageProps> = (props) => {
+  document.title = 'Profile page';
   const [access, setAccess] = React.useState(true);
   const [providerAccess, setProviderAccess] = React.useState(false);
   const auth = useAuth();

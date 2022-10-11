@@ -1,10 +1,7 @@
 import { IConvertReplies } from '@src/@types/__global__';
-import { useAuth } from '@src/services/context/Auth';
-import * as React from 'react';
-import ReactionBarWrapper from './ReactionBarWrapper';
 import GuestProfile from '@src/asserts/images/guest_profile.png';
-import ShowReactions from './ShowReactions';
-import { motion } from 'framer-motion';
+import { useAuth } from '@src/services/context/Auth';
+import { deleteCommentDocument } from '@src/services/Firebase/Documents/deleteDocument';
 import {
   createReactionField,
   removeReactionField,
@@ -12,10 +9,11 @@ import {
   updateReactionField,
 } from '@src/services/Firebase/Documents/updateDocument';
 import { convertTimestamp } from '@src/utils/ConvertTimestamp';
-import SettingWrapper from './SettingWrapper';
-import { deleteCommentDocument } from '@src/services/Firebase/Documents/deleteDocument';
+import * as React from 'react';
 import InputComment from './InputComment';
-import { CommentVariants } from './reactionAnimation';
+import ReactionBarWrapper from './ReactionBarWrapper';
+import SettingWrapper from './SettingWrapper';
+import ShowReactions from './ShowReactions';
 
 interface IChildCommentProps {
   type: string;
@@ -86,7 +84,7 @@ const ChildComment: React.FunctionComponent<IChildCommentProps> = (props) => {
 
   return (
     <li>
-      <div className="pl-8 pb-4 relative">
+      <div className="pl-4 up-mobile:pl-8 pb-4 relative">
         <div className="flex">
           <img
             src={sender.images.photoURL ? sender.images.photoURL : GuestProfile}
@@ -108,7 +106,7 @@ const ChildComment: React.FunctionComponent<IChildCommentProps> = (props) => {
               />
               {isEnableEdit && <InputComment onSubmit={handleOnSubmitEdit} placeholder="Write your edit comments..." />}
             </div>
-            <div className="text-white/80 inline-flex items-center gap-4 pt-4 px-4 relative">
+            <div className="text-white/80 inline-flex items-center gap-2 flex-wrap up-mobile:gap-4 pt-4 px-4 relative">
               {auth && <ReactionBarWrapper onReaction={handleOnReaction} hasReaction={hasReaction} />}
 
               <span className="text-sm text-white/60 inline-flex items-center">

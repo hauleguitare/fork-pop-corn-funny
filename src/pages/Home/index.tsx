@@ -19,7 +19,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <MotionChangePage>
+    <section>
       <BannerSection />
       <ContentSection sectionType={POPULAR_SECTION} title={`What's Popular`} />
       <ContentSection sectionType={TOPRATED_SECTION} title={`Let start with top rated`} />
@@ -27,7 +27,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
       <ContentSection sectionType={ONTV_SECTION} title={`On the Air`} />
       <ContentSection sectionType={AIRINGTODAY_SECTION} title={`Don't forget Aring Today`} />
       <ModalMovies />
-    </MotionChangePage>
+    </section>
   );
 };
 

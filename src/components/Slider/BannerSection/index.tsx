@@ -9,6 +9,7 @@ import './bannerSlider.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { ConvertBeautifulURL } from '@src/utils/ConvertBeautifulURL';
 
 interface IBannerSliderProps {
   data: ITrending[];
@@ -37,7 +38,10 @@ const BannerSlider: React.FunctionComponent<IBannerSliderProps> = (props) => {
     >
       {data.map((item) => (
         <SwiperSlide key={item.id}>
-          <Link to={'/hello'} className="relative group object-cover">
+          <Link
+            to={`/${item.media_type}/${ConvertBeautifulURL(item.id, item.title ?? item.name ?? '')}`}
+            className="relative group object-cover"
+          >
             <div className="relative flex mx-auto justify-center">
               <img src={`https://image.tmdb.org/t/p/w1280${item.backdrop_path}`} alt="backdrop movie" />
               <div className="absolute inset-0 bg-stone-dark-lighting/40">

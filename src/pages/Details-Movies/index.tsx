@@ -12,7 +12,6 @@ const DetailMovie: React.FunctionComponent<IDetailMovieProps> = (props) => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   if (!title_movie) {
     return null;
   }

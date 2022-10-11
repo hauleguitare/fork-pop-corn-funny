@@ -11,6 +11,7 @@ import QueryResults from './components/QueryResults';
 interface ISearchPageProps {}
 
 const SearchPage: React.FunctionComponent<ISearchPageProps> = (props) => {
+  document.title = 'Search page';
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 

@@ -1,4 +1,5 @@
 import { IComment, IReply } from '@src/@types/__Firebase__';
+import useCurrentViewPort from '@src/hooks/useCurrentViewPort';
 import { useAuth } from '@src/services/context/Auth';
 import { db } from '@src/services/Firebase';
 import { createCommentDocument } from '@src/services/Firebase/Documents/addDocument';
@@ -16,6 +17,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import InputComment from './InputComment';
 import ParentComment from './ParentComment';
 
@@ -29,7 +31,7 @@ const CommentDetails: React.FunctionComponent<ICommentDetailsProps> = (props) =>
   const auth = useAuth();
   const comments = useAppSelector((root) => root.comments.data);
   const dispatch = useAppDispatch();
-
+  const { width, isMobile } = useCurrentViewPort();
   // Use Effect
   React.useEffect(() => {
     if (!auth) {
@@ -105,10 +107,25 @@ const CommentDetails: React.FunctionComponent<ICommentDetailsProps> = (props) =>
           ))}
         </ul>
       ) : (
-        <div>Not Found comments</div>
+        <div className="flex flex-col items-center text-center justify-center up-mobile:text-xl text-base text-dark-smooth-text-default">
+          {auth ? (
+            <span>There are currently no comments, would you like to comment on this movie?</span>
+          ) : (
+            <React.Fragment>
+              <span>If you want to comment, please join by logging in to your account to be able to comment.</span>
+              <span>
+                If you don't have one, don't worry,{' '}
+                <Link to={'/signup'} className="underline text-blue-primary">
+                  click here
+                </Link>{' '}
+                to go to the registration page.
+              </span>
+            </React.Fragment>
+          )}
+        </div>
       )}
 
-      <InputComment onSubmit={handleOnSubmitComment} />
+      <InputComment onSubmit={handleOnSubmitComment} placementFloating={isMobile} />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { IConvertComment } from '@src/@types/__global__';
 import GuestProfile from '@src/asserts/images/guest_profile.png';
+import useCurrentViewPort from '@src/hooks/useCurrentViewPort';
 import { useAuth } from '@src/services/context/Auth';
 import { createReplyDocument } from '@src/services/Firebase/Documents/addDocument';
 import { deleteCommentDocument } from '@src/services/Firebase/Documents/deleteDocument';
-import { AnimatePresence, motion } from 'framer-motion';
 import {
   createReactionField,
   removeReactionField,
@@ -12,12 +12,12 @@ import {
 } from '@src/services/Firebase/Documents/updateDocument';
 import { convertTimestamp } from '@src/utils/ConvertTimestamp';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ChildComment from './ChildComment';
 import InputComment from './InputComment';
 import ReactionBarWrapper from './ReactionBarWrapper';
 import SettingWrapper from './SettingWrapper';
 import ShowReactions from './ShowReactions';
-import { CommentVariants } from './reactionAnimation';
 
 interface IParentCommentProps {
   type: string;
@@ -31,6 +31,8 @@ const ParentComment: React.FunctionComponent<IParentCommentProps> = (props) => {
   const { data, sender, replies } = comment;
   const [isEnableReply, setEnableReply] = React.useState(false);
   const [isEnableEdit, setEnableEdit] = React.useState(false);
+  const navigate = useNavigate();
+
   const hasReaction = data.reactions.find((comment) => comment.uid === auth?.uid);
 
   //Handle Event
@@ -130,13 +132,13 @@ const ParentComment: React.FunctionComponent<IParentCommentProps> = (props) => {
               {isEnableEdit && <InputComment onSubmit={handleOnSubmitEdit} placeholder="Write your edit comments..." />}
             </div>
 
-            <div className="text-white/80 inline-flex items-center gap-4 pt-4 px-4">
+            <div className="text-white/80 inline-flex items-center gap-2 flex-wrap up-mobile:gap-4 pt-4 px-4">
               {auth && (
                 <React.Fragment>
                   <ReactionBarWrapper onReaction={handleOnReaction} hasReaction={hasReaction} />
                   <button
                     onClick={handleOnEnableReply}
-                    className={`${isEnableReply ? 'text-white/80' : 'text-white/60'}`}
+                    className={`${isEnableReply ? 'text-white/80' : 'text-white/60'} up-mobile:text-base text-sm`}
                   >
                     Reply
                   </button>

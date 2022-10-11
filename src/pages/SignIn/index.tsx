@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 interface ISignInPageProps {}
 
 const SignInPage: React.FunctionComponent<ISignInPageProps> = (props) => {
+  document.title = 'Login page';
+
   const handleOnSubmit = async (dataSubmit: IDataSubmit) => {
     const Toastid = toast.loading('wait for second');
     try {
@@ -23,6 +25,7 @@ const SignInPage: React.FunctionComponent<ISignInPageProps> = (props) => {
         },
         type: 'success',
         closeButton: true,
+        closeOnClick: true,
         autoClose: 2000,
         isLoading: false,
       });
@@ -34,6 +37,7 @@ const SignInPage: React.FunctionComponent<ISignInPageProps> = (props) => {
         closeButton: true,
         type: 'error',
         autoClose: 2000,
+        closeOnClick: true,
         isLoading: false,
       });
     }

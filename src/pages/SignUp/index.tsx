@@ -15,6 +15,8 @@ import FormRegister, { IDataSubmit } from './components/Form/Register';
 interface ISignUpPageProps {}
 
 const SignUpPage: React.FunctionComponent<ISignUpPageProps> = (props) => {
+  document.title = 'Signup page';
+
   /* Handle On Register */
   const handleOnSubmit = async (dataSubmit: IDataSubmit) => {
     const displayName = dataSubmit.firstname + ' ' + dataSubmit.lastname;

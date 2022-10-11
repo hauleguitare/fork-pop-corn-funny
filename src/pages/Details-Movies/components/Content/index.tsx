@@ -13,6 +13,7 @@ interface IContentSectionProps {
 
 const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) => {
   const { data, type } = props;
+  document.title = data.title ?? data.name ?? '';
   const [tabDetail, setTabDetail] = React.useState('btn_tab_overview');
   const handleOnClickSwitchTab = (e: React.MouseEvent) => {
     setTabDetail(e.currentTarget.id);
@@ -70,7 +71,7 @@ const ContentSection: React.FunctionComponent<IContentSectionProps> = (props) =>
             tabName={tabDetail.replace('btn_tab_', '').toLowerCase()}
             data={data}
             type={type}
-            className="py-4 px-4 max-w-[1306px] grow up-mobile:w-[calc(100vw_-_230px-_32px)]"
+            className="py-4 up-mobile:px-4 max-w-[1306px] grow up-mobile:w-[calc(100vw_-_230px-_32px)]"
           />
           <aside className="w-[230px] px-4 up-mobile:px-0 text-white pt-4 grow-0">
             <SocialMedia data={data} urlHomePage={data.homepage} />

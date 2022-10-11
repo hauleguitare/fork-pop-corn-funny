@@ -37,7 +37,7 @@ const DesktopHeader: React.FunctionComponent<IDesktopHeaderProps> = (props) => {
                 <ul className="absolute min-w-max top-6 right-0 bg-white group-hover:visible invisible px-4 py-2">
                   {item.dropdownMenu?.map((subItem) => (
                     <li key={subItem.id}>
-                      <Link to={`${item.url || ''}${subItem.url || ''}`} className="text-black text-base">
+                      <Link to={`${item.url || ''}`} className="text-black text-base">
                         {subItem.name}
                       </Link>
                     </li>

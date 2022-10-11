@@ -79,7 +79,7 @@ const ActiveReactions: React.FunctionComponent<IActiveReactionsProps> = (props) 
           )}
         </React.Fragment>
       ) : (
-        <span className="text-white/60">Like</span>
+        <span className="text-white/60 up-mobile:text-base text-sm">Like</span>
       )}
     </React.Fragment>
   );

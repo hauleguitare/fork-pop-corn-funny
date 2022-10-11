@@ -9,15 +9,16 @@ interface IWatchMovieProps {
 const WatchMovie: React.FunctionComponent<IWatchMovieProps> = (props) => {
   const { type } = props;
   const { title_movie } = useParams();
-  if (!title_movie) {
-    return null;
-  }
-
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  if (!title_movie) {
+    return null;
+  }
   const arrTitle = title_movie.split('-');
   const movieId = Number(arrTitle[arrTitle.length - 1]);
+  document.title = 'Watching';
+
   return (
     <div>
       <MoviesSection movieId={movieId} type={type} />
